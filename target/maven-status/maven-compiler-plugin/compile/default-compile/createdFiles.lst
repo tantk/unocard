@@ -1,0 +1,5 @@
+socket\GenericResource.class
+socket\ClientSessionHandler.class
+socket\Client.class
+socket\ClientWebSocketServer.class
+socket\ApplicationConfig.class

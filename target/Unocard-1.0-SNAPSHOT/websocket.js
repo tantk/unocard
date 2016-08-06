@@ -89,7 +89,7 @@ function printDeviceElement(device) {
 
     var removeDevice = document.createElement("span");
     removeDevice.setAttribute("class", "removeDevice");
-    removeDevice.innerHTML = "<a href=\"#\" OnClick=removeDevice(" + device.id + ")>Remove device</a>";
+    removeDevice.innerHTML = "<a href=\"#\" OnClick=removeDevice(" + device.id + ")>Join</a>";
     deviceDiv.appendChild(removeDevice);
 }
 

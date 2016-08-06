@@ -102,35 +102,35 @@ p {
     text-align: center;
 }
 
-.device.Appliance {
+.device.Coop {
     background-color: #5eb85e;
 }
 
-.device.Appliance a:hover {
+.device.Coop a:hover {
     color: #a1ed82;
 }
 
-.device.Electronics {   
+.device.Bots {   
     background-color: #0f90d1;
 }
 
-.device.Electronics a:hover {
+.device.Bots a:hover {
     color: #4badd1;
 }
 
-.device.Lights {
+.device.Public {
     background-color: #c2a00c;
 }
 
-.device.Lights a:hover {
+.device.Public a:hover {
     color: #fad232;
 }
 
-.device.Other {
+.device.Private {
     background-color: #db524d;
 }
 
-.device.Other a:hover {
+.device.Private a:hover {
     color: #ff907d;
 }
 

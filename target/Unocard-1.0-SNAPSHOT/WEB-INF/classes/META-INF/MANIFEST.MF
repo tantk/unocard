@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1470580351222
+Bundle-ManifestVersion: 2
+Bundle-Name: Unocard
+Bundle-SymbolicName: Unocard
+Bundle-Version: 1.0.0.201608071432
+Created-By: 1.8.0_101 (Oracle Corporation)
+Import-Package: com.google.gson;version="[2.7,3)",javax.ejb,javax.ente
+ rprise.context,javax.inject,javax.json,javax.json.spi,javax.persisten
+ ce,javax.servlet;version="[3.1,4)",javax.servlet.annotation;version="
+ [3.1,4)",javax.servlet.http;version="[3.1,4)",javax.websocket,javax.w
+ ebsocket.server,javax.ws.rs;version="[2.0,3)",javax.ws.rs.core;versio
+ n="[2.0,3)"
+Private-Package: Manager,controller,entity,general,resource,socket
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.7))"
+Tool: Bnd-3.1.0.201512181341

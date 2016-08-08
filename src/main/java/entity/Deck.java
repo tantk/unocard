@@ -26,6 +26,9 @@ import entity.*;
 public class Deck extends pileOfCards {
 
     public Deck() {
+        
+    }
+    public void createDeck(){
         this.cardList = new LinkedList();
         //add card type 1 until card type drawtwo for each color 2 times
         for (int k = 0; k < 2; k++) {

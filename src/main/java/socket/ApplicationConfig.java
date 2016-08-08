@@ -29,6 +29,9 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(resource.GameResource.class);
+        resources.add(resource.PlayerResource.class);
+        resources.add(socket.GenericResource.class);
     }
     
 }

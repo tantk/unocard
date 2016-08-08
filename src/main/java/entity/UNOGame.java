@@ -23,7 +23,8 @@ public class UNOGame {
     private Deck gameDeck;
     private DiscardPile discardPile;
     private String gameName;
-
+    private int numberOfPlayer;
+    
     public String getGameName() {
         return gameName;
     }
@@ -52,7 +53,8 @@ public class UNOGame {
         this.gameStatus = gameStatus.waiting;
         this.gameDeck = new Deck();
         this.discardPile = new DiscardPile();
-
+        this.playerList= new ArrayList<Player>();
+        this.numberOfPlayer=0;
     }
 
     public String getGameID() {
@@ -89,10 +91,12 @@ public class UNOGame {
 
     public void addPlayer(Player p) {
         this.playerList.add(p);
+        this.numberOfPlayer++;
     }
 
     public void setupGame() {
         String startingPlayer = "";
+        this.gameDeck.createDeck();
         this.gameDeck.Shuffle();
 //7 cards for ea players
         for (int i = 0; i < 7; i++) {

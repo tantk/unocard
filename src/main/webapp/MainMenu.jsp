@@ -10,7 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Game</title>
+        <link rel="stylesheet" href="libs/chui/chui-ios-3.8.5.css">
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js" ></script>
+        <script src="libs/chui/chui-3.8.5.js"></script>
     </head>
     <body>
         <h1>New Game</h1>

@@ -20,9 +20,10 @@ limitations under the License.
         <title>The jQuery Example</title>
         <script type = "text/javascript" 
         src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        
+
         <script type = "text/javascript" language = "javascript">
             jQuery(document).ready(function ($) {
+
                 $.getJSON("uno/game/viewall", function (data) {
 
                     var ul = $('<ul />');
@@ -34,7 +35,7 @@ limitations under the License.
                         ul.append($('<span>', {text: " Status: " + value.gameStatus + "|"}));
                         ul.append($('<span>', {text: " Card Discarded: " + value.discardPile.numberOfCards + "|"}));
                         ul.append($('<span>', {text: " Number of player: " + value.numberOfPlayer + "|"}));
-                        ul.append($("<a>", { href: "uno/playerid" }).text("join"));
+                        ul.append($("<a>", {href: "Game/"+value.gameID}).text("join"));
                         ul.append("</div>");
                         $('body').append(ul);
                     });
@@ -47,11 +48,25 @@ limitations under the License.
     </head>
 
     <body>
-      
-
-        <p>Enter Your Name: <input type="text" id="playerName" name="playerName" value="Player 1"></p>
 
 
+        <p>Enter Your Name: <input type="text" id="playerName" name="playerName" value="Player 1">
+            <input type = "button" id = "driver" value = "Create Player" /></p>
+        <input type = "button" id = "playername" value = "Your username will displayed here once created" />
+        <script type = "text/javascript" language = "javascript">
+            $(document).ready(function () {
+
+                $("#driver").click(function (event) {
+                    $.getJSON('uno/player/create/' + $('#playerName').val(), function (jd) {
+
+
+                        $('#playername').val(jd + " has been created");
+                    });
+
+                });
+
+            });
+        </script>
     </body>
 
 </html>

@@ -5,6 +5,7 @@
  */
 package Manager;
 
+import com.google.gson.Gson;
 import entity.Player;
 import entity.UNOGame;
 import java.util.ArrayList;
@@ -23,21 +24,36 @@ import javax.persistence.PersistenceContext;
 //not sure about stateful/stateless
 @Stateless
 public class PlayerManager {
-private static Map<String,Player> globalPlayers= new HashMap<>();
+
+    private static Map<String, Player> globalPlayers = new HashMap<>();
+
+    public static Map<String, Player> getGlobalPlayers() {
+        return globalPlayers;
+    }
+
+    public static void setGlobalPlayers(Map<String, Player> globalPlayers) {
+        PlayerManager.globalPlayers = globalPlayers;
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     @PersistenceContext
     private EntityManager em;
-    
+
     public Player createPlayer(String name) {
-        
+
         Player player = new Player(name);
         globalPlayers.put(player.getId(), player);
 //        ArrayList<Player> plist = new ArrayList<>();
 //        plist.add(player);
 //        UNOGame gam = new UNOGame(plist);
 //        em.persist(gameMgr);
-        em.persist(globalPlayers);
+       System.out.print("player created");
         return player;
+    }
+
+    public String getAllPlayersJSon() {
+        Gson gson = new Gson();
+        String jsonInString = gson.toJson(globalPlayers);
+        return jsonInString;
     }
 }

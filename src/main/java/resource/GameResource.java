@@ -47,6 +47,7 @@ public class GameResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public void createGame(UNOGame game)
     {
+        
 //        Player g = new Player("yafas");
 //        ArrayList<Player> gs = new ArrayList<>();
 //        gs.add(g);

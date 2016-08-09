@@ -89,7 +89,7 @@ public class UNOGame {
     }
 //to implement remove player in future
 
-    public void addPlayer(Player p) {
+    public void addPlayerToGame(Player p) {
         this.playerList.add(p);
         this.numberOfPlayer++;
     }

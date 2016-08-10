@@ -18,8 +18,8 @@ package resource;
 import Manager.PlayerManager;
 import com.google.gson.Gson;
 import entity.Player;
-import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Produces;
@@ -39,7 +39,7 @@ import javax.ws.rs.core.Response;
 @RequestScoped
 public class PlayerResource {
 
-    @EJB
+    @Inject 
     private PlayerManager playerMgr;
 
     @GET

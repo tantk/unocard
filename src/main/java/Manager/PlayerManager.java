@@ -7,13 +7,10 @@ package Manager;
 
 import com.google.gson.Gson;
 import entity.Player;
-import entity.UNOGame;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -22,18 +19,16 @@ import javax.persistence.PersistenceContext;
  * @author tan
  */
 //not sure about stateful/stateless
-@Stateless
+@ApplicationScoped
 public class PlayerManager {
 
-    private static Map<String, Player> globalPlayers = new HashMap<>();
+    private Map<String, Player> globalPlayers = new HashMap<>();
 
-    public static Map<String, Player> getGlobalPlayers() {
-        return globalPlayers;
+    public  Map<String, Player> getGlobalPlayers() {
+        return this.globalPlayers;
     }
 
-    public static void setGlobalPlayers(Map<String, Player> globalPlayers) {
-        PlayerManager.globalPlayers = globalPlayers;
-    }
+   
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     @PersistenceContext

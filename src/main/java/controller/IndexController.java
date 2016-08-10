@@ -7,14 +7,17 @@ package controller;
 
 import Manager.GameManager;
 import Manager.PlayerManager;
+import com.google.gson.Gson;
 import entity.UNOGame;
 import java.io.IOException;
-import javax.ejb.EJB;
+import java.io.PrintWriter;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -23,9 +26,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/index")
 public class IndexController extends HttpServlet {
 
-    @EJB
+    @Inject
     private PlayerManager playerMgr;
-    @EJB
+    @Inject
     private GameManager gameMgr;
 
     /**
@@ -76,24 +79,24 @@ public class IndexController extends HttpServlet {
 //        System.out.print(gameName);
 //        System.out.print(playerName);
         System.out.print("got here");
-        
+
         //String playerName = request.getParameter("playerName");
         String gameName = request.getParameter("gameName");
-        UNOGame game=gameMgr.createGame(gameName);
-       // playerMgr.createPlayer(playerName);
-       request.setAttribute("game", game);
-       request.getRequestDispatcher("waitingRoom.jsp").forward(request, response);
-        
-   }
+        UNOGame game = gameMgr.createGame(gameName);
+        // playerMgr.createPlayer(playerName);
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        request.setAttribute("game", game);
+        request.getRequestDispatcher("waitingRoom.jsp").forward(request, response);
+//         Gson gson = new Gson();
+//        String jsonInString = gson.toJson(game);
+//        
+//       response.setContentType("text/html;charset=UTF-8");
+//        try (PrintWriter out = response.getWriter()) {
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println(jsonInString);
+
+    }
 
 }
+
+

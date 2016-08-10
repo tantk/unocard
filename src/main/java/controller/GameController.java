@@ -19,7 +19,7 @@ import Manager.GameManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
-import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +34,7 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "Game", urlPatterns = {"/Game/*"})
 public class GameController extends HttpServlet {
-@EJB private GameManager gameMgr;
+@Inject  private GameManager gameMgr;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

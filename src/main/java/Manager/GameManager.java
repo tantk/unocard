@@ -10,7 +10,8 @@ import entity.Player;
 import entity.UNOGame;
 import java.util.HashMap;
 import java.util.Map;
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -19,10 +20,12 @@ import javax.persistence.PersistenceContext;
  * @author tans
  */
 //not sure about stateful/stateless
-@Stateless
+@ApplicationScoped
 public class GameManager {
 
-    private static Map<String, UNOGame> globalUnoGames = new HashMap<>();
+    @Inject 
+    private PlayerManager playerMgr;
+    private Map<String, UNOGame> globalUnoGames = new HashMap<>();
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     @PersistenceContext
@@ -32,7 +35,7 @@ public class GameManager {
         UNOGame newGame = new UNOGame();
         newGame.setGameName(gameName);
         globalUnoGames.put(newGame.getGameID(), newGame);
-
+        
         System.out.print("got here");
         return newGame;
     }
@@ -48,7 +51,8 @@ public class GameManager {
     }
 
     public Player addPlayer(String gameID, String playerID) {
-        Player p = Manager.PlayerManager.getGlobalPlayers().get(playerID);
+        Player p = playerMgr.getGlobalPlayers().get(playerID);
+        //if static Manager.PlayerManager.getGlobalPlayers().get(playerID);
         globalUnoGames.get(gameID).addPlayerToGame(p);
         return p;
     }

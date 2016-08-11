@@ -73,7 +73,7 @@ public class GameController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        {
+        {//can do validation here
             HttpSession session = request.getSession();
             long creationTime = session.getCreationTime();
             String sessionId = session.getId();
@@ -84,21 +84,22 @@ public class GameController extends HttpServlet {
             StringBuffer buffer = new StringBuffer();
             String[] pathInfo = request.getPathInfo().split("/");
             String id = pathInfo[1]; // {id}
-           gameMgr.addPlayer(id, userID);
-            buffer.append(" <HTML> <HEAD> </HEAD> <BODY>");
-            buffer.append("<STRONG> Session ID : </STRONG>" + sessionId);
-            buffer.append(" <BR/> ");
-            buffer.append("<STRONG> Session Creation Time </STRONG>: " + createDate);
-            buffer.append(" <BR/> ");
-            buffer.append("<STRONG> Last Accessed Time : </STRONG>" + lastAccessedDate);
-            buffer.append(" <BR/> ");
-            buffer.append("<STRONG> UserID : </STRONG>" + userID);
-            buffer.append(" <BR/> ");
-            buffer.append("<STRONG> GameID : </STRONG>" + id);
-            buffer.append(" <BR/> ");
-            buffer.append(" </BODY> </HTML> ");
-            PrintWriter writer = response.getWriter();
-            writer.print(buffer.toString());
+            gameMgr.addPlayer(id, userID);
+//            buffer.append(" <HTML> <HEAD> </HEAD> <BODY>");
+//            buffer.append("<STRONG> Session ID : </STRONG>" + sessionId);
+//            buffer.append(" <BR/> ");
+//            buffer.append("<STRONG> Session Creation Time </STRONG>: " + createDate);
+//            buffer.append(" <BR/> ");
+//            buffer.append("<STRONG> Last Accessed Time : </STRONG>" + lastAccessedDate);
+//            buffer.append(" <BR/> ");
+//            buffer.append("<STRONG> UserID : </STRONG>" + userID);
+//            buffer.append(" <BR/> ");
+//            buffer.append("<STRONG> GameID : </STRONG>" + id);
+//            buffer.append(" <BR/> ");
+//            buffer.append(" </BODY> </HTML> ");
+//            PrintWriter writer = response.getWriter();
+//            writer.print(buffer.toString());
+            request.getRequestDispatcher("/WaitingRoom.html").forward(request, response);
         }
     }
 

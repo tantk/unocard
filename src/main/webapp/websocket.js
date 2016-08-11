@@ -6,7 +6,7 @@
 
 
 window.onload = init;
-var socket = new WebSocket("ws://localhost:8080/UnoApp/actions");
+var socket = new WebSocket("ws://localhost:8080/Unocard/actions");
 socket.onmessage = onMessage;
 
 function onMessage(event) {

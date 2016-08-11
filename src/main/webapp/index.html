@@ -1,43 +1,85 @@
 <!DOCTYPE html>
+
 <html>
     <head>
-        <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script src="websocket.js"></script>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Create Game</title>
+
+        <link rel="stylesheet" href="libs/chui/chui-android-3.9.2.css" type="text/css">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" ></script>
+        <script src="GameView.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="libs/chui/chui-3.9.2.js"></script>
+        <script src="libs/handlebar/handlebars-v4.0.5.js"></script>
+
+        <script type="text/x-handlebars" id="playerListTemplate"></script>
     </head>
     <body>
+        <form method="POST" action="api">
+        <nav class="Game01">
+            <h1>Create a New Game</h1>
+        </nav>
+        <article id="new_game" class="Game01">
+            <section>
+                
+                    <h1>
+                        <label for="new_game_title"> Title:</label>
+                        <input  id="new_game_title" name="gameName" type="text" size="30" placeholder="Please input a new game title." ><button type="button" id="new_game_createBtn">Create</button>
+                    </h1>
+                
+            </section>
+        </article>
 
-        <div id="wrapper">
-            <h1>Java Websocket Home</h1>
-            <p>Welcome to the Java WebSocket Home. Click the Add a device button to start adding devices.</p>
-            <br />
-            <div id="addDevice">
-                <div class="button"> <a href="#" OnClick="showForm()">Add a device</a> </div>
-                <form id="addDeviceForm">
-                    <h3>Add a new device</h3>
-                    <span>Name: <input type="text" name="device_name" id="device_name"></span>
-                    <span>Type: 
-                        <select id="device_type">
-                            <option name="type" value="Coop">Coop</option>
-                            <option name="type" value="Bots">Bots</option>
-                            <option name="type" value="Public">Public</option>
-                            <option name="type" value="Private">Private</option>
-                        </select></span>
+        <nav>
+            <h1>Waiting for Players(<span id="wait_game_player_count">0</span>)</h1>
+            <button id="wait_game_refreshBtn">Refresh</button>
+        </nav>
 
-                    <span>Description:<br />
-                        <textarea name="description" id="device_description" rows="2" cols="50"></textarea>
-                    </span>
+        <article id="wait_game">
+            <section>
+                <ul class="list">
+                    <li>
+                        <label for="wait_game_gameID">Game ID</label>
+                        <span id="wait_game_gameID" ></span>
+                    </li>
+                    <li>
+                        <label for="wait_game_title">Title</label>
+                        <span id="wait_game_title"></span>
+                    </li>
+                </ul>
+                <p>
+                    <button type="button" id="wait_game_startBtn">Start</button>
+                </p>
+            </section>
+        </article>
 
-                    <input type="button" class="button" value="Add" onclick=formSubmit()>
-                    <input type="reset" class="button" value="Cancel" onclick=hideForm()>
-                </form>
-            </div>
-            <br />
-            <h3>Currently connected devices:</h3>
-            <div id="content">
-            </div>
-        </div>
+        <nav>
+            <h1>Game:<span id="play_uno_gameID"></span></h1>
+        </nav>
+        <article id="play_uno">
+            <section id="play_uno_table">
+                <table>
+                    <tr>
+                        <td rowspan="2">
+                            <h4>Cards:<span id="play_uno_card_num"></span></h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="play_uno_players"></td>
+                    </tr>
 
+                    <tr>
+                        <td>
+                            <div>
+                                <img src="" id="play_uno_discard_card">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+
+
+        </article>
+        </form>
     </body>
 </html>

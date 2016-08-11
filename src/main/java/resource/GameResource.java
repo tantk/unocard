@@ -52,6 +52,7 @@ public class GameResource {
         Gson gson = new Gson();
         UNOGame g = gameMgr.createGame(gamename);
         String jsonInString = gson.toJson(g);
+        System.out.print("create game post");
         return Response.ok(jsonInString).build();
     }
 

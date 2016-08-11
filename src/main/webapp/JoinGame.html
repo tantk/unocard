@@ -22,60 +22,64 @@ limitations under the License.
         src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="libs/handlebar/handlebars-v4.0.5.js"></script>
         <script src="libs/chui/chui-3.9.2.js"></script>
-        <link rel="stylesheet" href="libs/chui/chui-ios-3.9.2.css">
-        <script type = "text/javascript" language = "javascript">
+        <script src="libs/handlebar/handlebars-v4.0.5.js"></script>
+        <script src="joingame.js"></script>
+        <link rel="stylesheet" href="libs/chui/chui-android-3.9.2.css">
 
-            jQuery(document).ready(function ($) {
-
-                $.getJSON("uno/game/viewall", function (data) {
-
-                    var ul = $('<ul />');
-
-                    $.each(data, function (key, value) {
-                        ul.append("<li>");
-                        ul.append($('<span>', {text: " Game Name: " + value.gameName + "|"}));
-                        ul.append($('<span>', {text: " ID: " + value.gameID + "|"}));
-                        ul.append($('<span>', {text: " Status: " + value.gameStatus + "|"}));
-                        ul.append($('<span>', {text: " Card Discarded: " + value.discardPile.numberOfCards + "|"}));
-                        ul.append($('<span>', {text: " Number of player: " + value.numberOfPlayer + "|"}));
-                        ul.append($("<a>", {href: "Game/" + value.gameID}).text("join"));
-                        ul.append("</li>");
-                        $('body').append(ul);
-                    });
-
-                    $('.list').append(ul);
-                });
-            });
-
+        <script type = "text/x-handlebars" id ="gameTemplate">
+            
+                {{#each game}}
+                    <li class='comp'>
+                    <aside>
+                    <h3>{{this.gameID}}</h3></aside>
+                    <div>
+                    <h4>Game Name: {{this.gameName}}</h4>
+                    <h4>Game Status: {{this.gameStatus}}</h4>
+                    <h4>Card discarded: {{this.discardPile.numberOfCards}}</h4>
+                    <h4>Number of players: {{this.numberOfPlayer}}</h4>
+                    </div>
+                    <aside><a id="{{this.gameID}}"><button>Join</button></a></aside>
+                    </li>
+                {{/each}}
+            //href="Game/{{this.gameID}}"
         </script>
     </head>
 
     <body>
         <nav>
-            <h1>Name: <input type="text" id="playerName" name="playerName" value="Player 1"><input type = "button" id = "driver" value = "Create Player" /><input type = "button" id = "playername" value = "Your username will displayed here once created" /></h1>
+            <h1>Name: <input type="text" id="playerName" name="playerName" value="Player 1"><input type = "button" id = "driver" value = "Create Player" /><input type = "button" id = "reloadBtn" value = "Your username will displayed here once created" /></h1>
         </nav>
         <article id="joinGame">
 
             <section>
-                <ul class="list">
+                <h2>List of games</h2>
+                <ul class="list" id ="view-games">
+
                 </ul>
             </section>
         </article>
 
 
         <script type = "text/javascript" language = "javascript">
-            $(document).ready(function () {
+$(document).ready(function () {
 
-                $("#driver").click(function (event) {
-                    $.getJSON('uno/player/create/' + $('#playerName').val(), function (jd) {
+    $("#driver").click(function (event) {
+        $.getJSON('uno/player/create/' + $('#playerName').val(), function (jd) {
 
 
-                        $('#playername').val(jd + " has been created");
-                    });
+            $('#reloadBtn').val(jd + " has been created");
+            alert("TEST");
+        });
 
-                });
+    });
+$(".gameTemplate").on("singletap","li",function(){
+    gid=$(this).find("h3").text();
+    console.log(gid);
+    
+}
+);
+});
 
-            });
         </script>
 
     </body>

@@ -35,7 +35,6 @@ public class GameManager {
         UNOGame newGame = new UNOGame();
         newGame.setGameName(gameName);
         globalUnoGames.put(newGame.getGameID(), newGame);
-        
         System.out.print("got here");
         return newGame;
     }

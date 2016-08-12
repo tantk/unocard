@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import entity.Player;
 import entity.UNOGame;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -55,5 +57,23 @@ public class GameManager {
         globalUnoGames.get(gameID).addPlayerToGame(p);
         return p;
     }
-
+    public List getPlayerList(String gameID)
+    {
+        return globalUnoGames.get(gameID).getPlayerList();
+    }
+    public String getStatus(String gameID)
+    {
+    return globalUnoGames.get(gameID).getGameStatus().toString();
+    }
+    public void startGame(String gameID)
+    {
+    globalUnoGames.get(gameID).changeToStarted();
+    globalUnoGames.get(gameID).setupGame();
+    }
+    public LinkedList getPlayerHandCardList(String gameID,String playerID)
+            
+    {
+        return globalUnoGames.get(gameID).getPlayerHand(playerID).getCardList();
+    }
+    
 }

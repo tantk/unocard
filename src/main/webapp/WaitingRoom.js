@@ -15,34 +15,3 @@
  */
 
 
-$(function () {
-    var connection = null;
-    var displaychat = function (msg) {
-        $("#chatarea").prepend(
-                $("<div>").text(msg));
-
-    }
-    $("#connectBtn").on("click", function () {
-        connection = new WebSocket("ws://localhost:8080/Unocard/waitingroom");
-        connection.onopen = function () {
-
-            displayChat("Websocket is connected");
-        }
-
-        connection.onclose = function ()
-        {
-            displayChat("Websocket is closed");
-        }
-        connection.onmessage = function ()
-        {
-            displayChat(msg.data);
-        }
-
-    });
-    $("#sendBtn").on("click", function () {
-        connection.send($("#message").val());
-        
-        $("#message").val("");
-    }
-    )
-});

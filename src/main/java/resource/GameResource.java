@@ -15,8 +15,10 @@
  */
 package resource;
 
+import JerseyClass.playergamedetails;
 import Manager.GameManager;
 import com.google.gson.Gson;
+import entity.PlayerHand;
 import entity.UNOGame;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
@@ -41,18 +43,39 @@ public class GameResource {
 
     @Inject
     private GameManager gameMgr;
+
     public GameResource() {
     }
 
     @POST
     @Path("create/{gamename}")
     @Produces("application/json")
-    public Response createGame(@PathParam("gamename") String gamename)
-    {
+    public Response createGame(@PathParam("gamename") String gamename) {
         Gson gson = new Gson();
         UNOGame g = gameMgr.createGame(gamename);
         String jsonInString = gson.toJson(g);
         System.out.print("create game post");
+        return Response.ok(jsonInString).build();
+    }
+
+    @POST
+    @Path("startgame")
+    @Consumes("application/json")
+
+    public void startGame(final playergamedetails input) {
+
+        gameMgr.startGame(input.gameID);
+    }
+
+    @POST
+    @Path("getplayerhand")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response getPlayerHand(final playergamedetails input) {
+        System.out.print("cards given");
+        
+        Gson gson = new Gson();
+        String jsonInString = gson.toJson(gameMgr.getPlayerHandCardList(input.gameID, input.playerID));
         return Response.ok(jsonInString).build();
     }
 
@@ -68,6 +91,38 @@ public class GameResource {
         //TODO return proper representation object
         return Response.ok(gameMgr.getAllGamesJSon()).build();
 
+    }
+
+    @GET
+    @Path("/view/{gameid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response seePlayersInGame(@PathParam("gameid") String gameid) {
+        //TODO return proper representation object
+        Gson gson = new Gson();
+        String jsonInString = gson.toJson(gameMgr.getPlayerList(gameid));
+        return Response.ok(jsonInString).build();
+
+    }
+
+    @GET
+    @Path("/view/{gameid}/status")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getGameStatus(@PathParam("gameid") String gameid) {
+        //TODO return proper representation object
+        Gson gson = new Gson();
+        String jsonInString = gson.toJson(gameMgr.getStatus(gameid));
+        return Response.ok(jsonInString).build();
+
+    }
+
+    @POST
+    @Path("joingame")
+    @Consumes("application/json")
+
+    public void joinGame(final playergamedetails input) {
+        System.out.print(input.gameID);
+        System.out.print(input.playerID);
+        gameMgr.addPlayer(input.gameID, input.playerID);
     }
 
     /**

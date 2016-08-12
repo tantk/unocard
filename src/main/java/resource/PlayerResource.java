@@ -58,7 +58,7 @@ public class PlayerResource {
         session.setAttribute("UserName", makePlayer);
         session.setAttribute("userID", g.getId());
         Gson gson = new Gson();
-        String jsonInString = gson.toJson(session.getAttribute("UserName"));
+        String jsonInString = gson.toJson(session.getAttribute("userID"));
 
         // Player player= playerMgr.createPlayer(makePlayer);
         return (Response.ok(jsonInString).build());

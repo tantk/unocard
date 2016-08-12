@@ -17,7 +17,7 @@ limitations under the License.
 <html>
 
     <head>
-        <title>The jQuery Example</title>
+        <title>UnoClient</title>
         <script type = "text/javascript" 
         src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="libs/handlebar/handlebars-v4.0.5.js"></script>
@@ -31,25 +31,47 @@ limitations under the License.
                 {{#each game}}
                     <li class='comp'>
                     <aside>
-                    <h3>{{this.gameID}}</h3></aside>
+                    <h3 id="gameID">{{this.gameID}}</h3></aside>
                     <div>
                     <h4>Game Name: {{this.gameName}}</h4>
                     <h4>Game Status: {{this.gameStatus}}</h4>
                     <h4>Card discarded: {{this.discardPile.numberOfCards}}</h4>
                     <h4>Number of players: {{this.numberOfPlayer}}</h4>
                     </div>
-                    <aside><a id="{{this.gameID}}"><button>Join</button></a></aside>
+                    <aside><button>Join</button></aside>
                     </li>
                 {{/each}}
-            //href="Game/{{this.gameID}}"
+            
+        </script>
+        <script type = "text/x-handlebars" id ="waitingRoomTemplate">
+            
+        {{#each players}}
+            <li class='comp'>
+            <div>
+            <h4>Player ID: {{this.id}}</h4>
+            <h4>Player Name: {{this.name}}</h4>
+            </div>
+            <aside><button>WebSocketReady</button></aside>
+            </li>
+        {{/each}}
+            
+        </script>
+        <script type = "text/x-handlebars" id ="gameRoomTemplate">
+            
+                {{#each card}}
+                    <li class='comp'>
+                    <img src="image/uno_deck/{{this.image}}"></h3></aside>
+                    </li>
+                {{/each}}
+            
         </script>
     </head>
 
     <body>
-        <nav>
-            <h1>Name: <input type="text" id="playerName" name="playerName" value="Player 1"><input type = "button" id = "driver" value = "Create Player" /><input type = "button" id = "reloadBtn" value = "Your username will displayed here once created" /></h1>
+        <nav class="joinGame">
+            <h1>Name: <input type="text" id="playerName" name="playerName" value="Player 1"><input type = "button" id = "driver" value = "Create Player" /><input type = "button" id = "loadlist" value = "Your username will displayed here once created" /></h1>
         </nav>
-        <article id="joinGame">
+        <article id="joinGame" class="joinGame">
 
             <section>
                 <h2>List of games</h2>
@@ -58,29 +80,38 @@ limitations under the License.
                 </ul>
             </section>
         </article>
+        <nav class ="waitingroom">
+            <h1>Waiting for Players(<span id="wait_game_player_count"></span>)</h1>
+            <button id="wait_game_refreshBtn">Refresh</button>
+        </nav>
+
+        <article id="wait_game" class ="waitingroom">
+            <section>
+                <ul class="list" id="view-players">
+
+                </ul>
+                <p>
+                    <button type="button" id="wait_game_startBtn">Start</button>
+                </p>
+            </section>
+        </article>
+        <nav class ="gameRoom">
+            <h1>YourHand</h1>
+            <button id="gameRoom_refreshBtn">Refresh</button>
+        </nav>
+
+        <article id="gameRoom" class ="gameRoom">
+            <section>
+                <ul class="list" id="view-cards">
+
+                </ul>
+                <p>
+
+                </p>
+            </section>
+        </article>
 
 
-        <script type = "text/javascript" language = "javascript">
-$(document).ready(function () {
-
-    $("#driver").click(function (event) {
-        $.getJSON('uno/player/create/' + $('#playerName').val(), function (jd) {
-
-
-            $('#reloadBtn').val(jd + " has been created");
-            alert("TEST");
-        });
-
-    });
-$(".gameTemplate").on("singletap","li",function(){
-    gid=$(this).find("h3").text();
-    console.log(gid);
-    
-}
-);
-});
-
-        </script>
 
     </body>
 

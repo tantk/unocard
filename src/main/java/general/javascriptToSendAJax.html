@@ -48,7 +48,29 @@ limitations under the License.
 
 
         </script>
+ jQuery(document).ready(function ($) {
 
+                $.getJSON("uno/game/viewall", function (data) {
+
+                    var ul = $('<ul />');
+
+                    $.each(data, function (key, value) {
+                        ul.append("<li>");
+
+                        ul.append("<h3> Game Name: " + value.gameName +"</h3>");
+                       // ul.append($('<p>', {text: " ID: " + value.gameID}));
+                      //  ul.append($('<p>', {text: " Status: " + value.gameStatus}));
+                        // ul.append($('<p>', {text: " Card Discarded: " + value.discardPile.numberOfCards}));
+                      //  ul.append($('<p>', {text: " Number of player: " + value.numberOfPlayer}));
+                      //  ul.append($("<a>", {href: "Game/" + value.gameID}).text("join"));
+                        ul.append("</li>");
+                        
+                    });
+
+                    $('.list').append(ul);
+                  //  $("ul").addClass("list");
+                });
+            });
 -->
 <html>
     <head>

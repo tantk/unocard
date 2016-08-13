@@ -16,13 +16,17 @@
 package resource;
 
 import Manager.PlayerManager;
+import com.google.gson.Gson;
 import entity.Player;
-import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -31,26 +35,43 @@ import javax.ws.rs.core.Response;
  *
  * @author tantk
  */
-@Path("play")
+@Path("player")
 @RequestScoped
 public class PlayerResource {
-   @EJB private PlayerManager playerMgr;
+
+    @Inject 
+    private PlayerManager playerMgr;
+
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getIt() {
         return "Hello, Heroku!";
     }
-    @GET
-    @Path("{makePlayer}")
-    @Produces("application/json")
-    public Response get(@PathParam("makePlayer") String makePlayer){
-      //  PlayerManager playerMgr = new 
-        Player g = new Player(makePlayer);
-      // Player player= playerMgr.createPlayer(makePlayer);
 
-        return (Response.ok(g.playerToJson()).build());
-      
-      
+    @GET
+    @Path("create/{makePlayer}")
+    @Produces("application/json")
+    public Response get(@Context HttpServletRequest request, @PathParam("makePlayer") String makePlayer) {
+        //  PlayerManager playerMgr = new 
+        Player g = playerMgr.createPlayer(makePlayer);
+        HttpSession session = request.getSession();
+        session.setAttribute("UserName", makePlayer);
+        session.setAttribute("userID", g.getId());
+        Gson gson = new Gson();
+        String jsonInString = gson.toJson(session.getAttribute("userID"));
+
+        // Player player= playerMgr.createPlayer(makePlayer);
+        return (Response.ok(jsonInString).build());
+
     }
-    
+
+    @GET
+    @Path("/viewall")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response seeAllGame() {
+        //TODO return proper representation object
+        return Response.ok(playerMgr.getAllPlayersJSon()).build();
+
     }
+
+}

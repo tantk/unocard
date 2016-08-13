@@ -11,6 +11,8 @@ import general.utility;
 import javax.json.Json;
 import javax.json.JsonArray;
 import com.google.gson.*;
+import sun.net.www.content.audio.x_aiff;
+
 /**
  *
  * @author tan
@@ -24,7 +26,7 @@ public class UNOGame {
     private DiscardPile discardPile;
     private String gameName;
     private int numberOfPlayer;
-    
+
     public String getGameName() {
         return gameName;
     }
@@ -53,8 +55,8 @@ public class UNOGame {
         this.gameStatus = gameStatus.waiting;
         this.gameDeck = new Deck();
         this.discardPile = new DiscardPile();
-        this.playerList= new ArrayList<Player>();
-        this.numberOfPlayer=0;
+        this.playerList = new ArrayList<Player>();
+        this.numberOfPlayer = 0;
     }
 
     public String getGameID() {
@@ -89,7 +91,7 @@ public class UNOGame {
     }
 //to implement remove player in future
 
-    public void addPlayer(Player p) {
+    public void addPlayerToGame(Player p) {
         this.playerList.add(p);
         this.numberOfPlayer++;
     }
@@ -106,7 +108,7 @@ public class UNOGame {
         }
         //form discardpile
         this.discardPile.cardList.add(this.gameDeck.removeCard());
-        
+        this.discardPile.cardList.add(this.gameDeck.removeCard());
         //System.out.println("Game ID:" + this.getGameID());
         //assume random player start first,get starting player:
         startingPlayer = this.playerList.get(utility.randInt(0, this.playerList.size() - 1)).getName();
@@ -131,6 +133,18 @@ public class UNOGame {
             p.showPlayerHand();
             System.out.println();
         }
+    }
+
+    public PlayerHand getPlayerHand(String PlayerID) {
+        PlayerHand g = new PlayerHand();
+        for (Player x : this.playerList) {
+            if (x.getId().equals(PlayerID)) {
+                g = x.getPlayerHand();
+
+            }
+
+        }
+        return g;
     }
 
     //change game status
@@ -158,9 +172,10 @@ public class UNOGame {
         return a;
 
     }
-    public String unoGameToJson(){
-    Gson gson = new Gson();
-    String jsonInString = gson.toJson(this);
-    return jsonInString;
+
+    public String unoGameToJson() {
+        Gson gson = new Gson();
+        String jsonInString = gson.toJson(this);
+        return jsonInString;
     }
 }

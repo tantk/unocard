@@ -114,6 +114,16 @@ public class GameResource {
         return Response.ok(jsonInString).build();
 
     }
+    @GET
+    @Path("/view/{gameid}/showTopDiscard")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response showTopDiscard(@PathParam("gameid") String gameid) {
+        //TODO return proper representation object
+        Gson gson = new Gson();
+        String jsonInString = gson.toJson(gameMgr.showTopDiscard(gameid));
+        return Response.ok(jsonInString).build();
+
+    }
 
     @POST
     @Path("joingame")

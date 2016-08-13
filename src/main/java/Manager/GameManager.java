@@ -6,6 +6,7 @@
 package Manager;
 
 import com.google.gson.Gson;
+import entity.Card;
 import entity.Player;
 import entity.UNOGame;
 import java.util.HashMap;
@@ -74,6 +75,11 @@ public class GameManager {
             
     {
         return globalUnoGames.get(gameID).getPlayerHand(playerID).getCardList();
+    }
+    public Card showTopDiscard(String gameID)
+            
+    {
+        return globalUnoGames.get(gameID).getDiscardPile().showTopCard();
     }
     
 }

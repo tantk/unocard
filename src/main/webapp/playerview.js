@@ -127,8 +127,8 @@ $(function ()
             }
         });
     });
-    
-  $("#gameRoom_refreshBtn").on("singletap", function startGame()
+
+    $("#gameRoom_refreshBtn").on("singletap", function startGame()
     {
         var data = {};
         data["gameID"] = gameID;
@@ -151,7 +151,7 @@ $(function ()
             $("#view-cards").append(gameRoomTemplate({card: result}));
         });
     });
-    
+
 
 
 });

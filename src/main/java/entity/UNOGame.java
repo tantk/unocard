@@ -108,7 +108,7 @@ public class UNOGame {
         }
         //form discardpile
         this.discardPile.cardList.add(this.gameDeck.removeCard());
-
+        this.discardPile.cardList.add(this.gameDeck.removeCard());
         //System.out.println("Game ID:" + this.getGameID());
         //assume random player start first,get starting player:
         startingPlayer = this.playerList.get(utility.randInt(0, this.playerList.size() - 1)).getName();
@@ -136,13 +136,12 @@ public class UNOGame {
     }
 
     public PlayerHand getPlayerHand(String PlayerID) {
-        PlayerHand g= new PlayerHand();
+        PlayerHand g = new PlayerHand();
         for (Player x : this.playerList) {
             if (x.getId().equals(PlayerID)) {
-                g=x.getPlayerHand();
-                
+                g = x.getPlayerHand();
+
             }
-           
 
         }
         return g;

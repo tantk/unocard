@@ -15,7 +15,7 @@
  */
 package resource;
 
-import JerseyClass.playergamedetails;
+import dataTransferClass.playergamedetails;
 import Manager.GameManager;
 import com.google.gson.Gson;
 import entity.PlayerHand;

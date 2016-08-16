@@ -13,19 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package JerseyClass;
+package websocket;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
 /**
  *
  * @author tan
  */
-@XmlRootElement
-public class playergamedetails {
-    @XmlElement public String gameID;
-    @XmlElement public String playerID;
+public class ChatMessage {
+    private String message;
+	private String sender;
+	private Date received;
 
-    
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public Date getReceived() {
+        return received;
+    }
+
+    public void setReceived(Date received) {
+        this.received = received;
+    }
 }

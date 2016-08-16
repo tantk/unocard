@@ -1,0 +1,25 @@
+{
+  "name": "unocard",
+  "version": "1.0.0",
+  "description": "adv web project",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.10.2",
+    "handlebars": "^4.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tantk/unocard.git"
+  },
+  "keywords": [],
+  "author": "huanghe,lirong,longbowen,tantiankian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tantk/unocard/issues"
+  },
+  "homepage": "https://github.com/tantk/unocard#readme"
+}

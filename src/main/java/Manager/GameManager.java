@@ -81,5 +81,8 @@ public class GameManager {
     {
         return globalUnoGames.get(gameID).getDiscardPile().showTopCard();
     }
-    
+    public UNOGame getGame(String gameID)        
+    {
+        return globalUnoGames.get(gameID);
+    }
 }

@@ -17,9 +17,11 @@
 
 var PlayerID;
 var gameID;
+var connection = null;
+var selectedCard;
 $(function ()
 {
-    $("#driver").click(function (event) {
+    $("#createPlayer").click(function (event) {
         $.getJSON('uno/player/create/' + $('#playerName').val(), function (jd) {
             $('#loadlist').val(jd + " has been created");
             PlayerID = jd;
@@ -31,8 +33,7 @@ $(function ()
         gid = $(this).find("h3").text();
         console.log(gid);
 
-    }
-    );
+    });
     var gameTemplate = Handlebars.compile($("#gameTemplate").html());
     var waitingRoomTemplate = Handlebars.compile($("#waitingRoomTemplate").html());
     var gameRoomTemplate = Handlebars.compile($("#gameRoomTemplate").html());
@@ -52,7 +53,6 @@ $(function ()
 
 
         gameID = $(this).find("h3").text();
-
         alert(gameID);
         var data = {};
         data["gameID"] = gameID;
@@ -70,8 +70,109 @@ $(function ()
             }
         });
 
-        $("#wait_game_refreshBtn").trigger("singletap");
+        $("#wait_game_refreshBtn").trigger('singletap');
+
+
+
+        $(function () {
+            var RoomID = gameID;
+            alert(RoomID);
+
+
+            connection = new WebSocket('ws://localhost:8080/unocard/gameroom/' + RoomID);
+
+            connection.onerror = function (event) {
+                onError(event);
+            };
+
+            connection.onopen = function (event) {
+                onOpen(event);
+            };
+
+            connection.onmessage = function (event) {
+                onMessage(event);
+            };
+
+            function onMessage(event) {
+                var msg = JSON.parse(event.data);
+                console.log("receive:" + JSON.stringify(event.data));
+                switch (msg.cmd)
+                {
+                    case 'getPlayerInfo':
+                        var data = {};
+                        data["cmd"] = msg.cmd + "-ack";
+                        data["gameID"] = gameID;
+                        data["playerID"] = PlayerID;
+                        connection.send(JSON.stringify(data));
+                        break;
+                    case 'waitingRoom-RefreshPlayer':
+                        console.log("someone joined");
+                        $.getJSON("uno/game/view/" + gameID).done(function (result) {
+                            var players = waitingRoomTemplate({players: result});
+                            $("#view-players").empty();
+                            $("#view-players").append(players);
+                            var keys = [];
+                            for (var k in result)
+                                keys.push(k);
+                            $('#wait_game_player_count').html(keys.length);
+
+                        });
+                        break;
+                    case 'waitingRoomClient-StartGame':
+                        $.getJSON('uno/game/view/' + gameID + '/status', function (status) {
+
+                            var gameStatus = status;
+
+                            if (gameStatus === "started") {
+                                $.UIGoToArticle("#gameRoom");
+                                var data = {};
+                                data["gameID"] = gameID;
+                                data["playerID"] = PlayerID;
+                                $.ajax({
+                                    type: "Post",
+                                    url: "uno/game/getplayerhand",
+                                    contentType: "application/json",
+                                    data: JSON.stringify(data),
+                                    success: function () {
+                                        alert('got cards');
+                                    },
+                                    error: function () {
+                                        alert('cant start: game has already started or player is not created properly');
+                                    }
+                                }).done(function (result)
+                                {
+                                    $("#view-cards").append(gameRoomTemplate({card: result}));
+                                });
+                            }
+                            $(".gameRoom").on("singletap", "li", function (event) {
+                                selectedCard= $(this).find(":input").val();
+                                        //($('input[cardIndex]').val());
+                                 //$(this).find(":input").text();
+                                
+                                console.log(selectedCard);
+                                alert(selectedCard);
+
+                            });
+                        });
+
+                        break;
+                }
+
+            }
+
+            function onOpen(event) {
+
+            }
+
+            function onError(event) {
+                alert(event.data);
+            }
+
+
+        });
+
         $.UIGoToArticle("#wait_game");
+
 
     });
 
@@ -87,26 +188,19 @@ $(function ()
             $('#wait_game_player_count').html(keys.length);
 
         });
-        var Intervals = setInterval(function () {
-            myTimer();
-        }, 5000);
-        function myTimer() {
-            (function updateGameStatus() {
-                $.getJSON('uno/game/view/' + gameID + '/status', function (status) {
 
-                    var gameStatus = status;
-                    alert(gameStatus);
-                    if (gameStatus === "started") {
-                        clearInterval(Intervals);
-                        $.UIGoToArticle("#wait_game");
-                    }
-                }).then(function () {           // on completion, restart
-                    setTimeout(updateGameStatus, 5000);  // function refers to itself
-                });
+        function updateGameStatus() {
+            $.getJSON('uno/game/view/' + gameID + '/status', function (status) {
+
+                var gameStatus = status;
+
+                if (gameStatus === "started") {
+                    $.UIGoToArticle("#gameRoom");
+                }
             });
         }
-        ;
     });
+
     $("#wait_game_startBtn").on("singletap", function startGame()
     {
         var data = {};
@@ -126,6 +220,11 @@ $(function ()
 
             }
         });
+        var sendmsg = {};
+        sendmsg["cmd"] = "WaitingRoomEndPoint-StartGame";
+        sendmsg["gameID"] = gameID;
+        sendmsg["playerID"] = PlayerID;
+        connection.send(JSON.stringify(sendmsg));
     });
 
     $("#gameRoom_refreshBtn").on("singletap", function startGame()
@@ -151,44 +250,5 @@ $(function ()
             $("#view-cards").append(gameRoomTemplate({card: result}));
         });
     });
-
-
-
 });
-
-
-
-//websocket
-$(function () {
-    var connection = null;
-    var displaychat = function (msg) {
-        $("#chatarea").prepend(
-                $("<div>").text(msg));
-
-    };
-    $("#connectBtn").on("click", function () {
-        connection = new WebSocket("ws://localhost:8080/Unocard/waitingroom");
-        connection.onopen = function () {
-
-            displayChat("Websocket is connected");
-        };
-
-        connection.onclose = function ()
-        {
-            displayChat("Websocket is closed");
-        };
-        connection.onmessage = function ()
-        {
-            displayChat(msg.data);
-        };
-
-    });
-    $("#sendBtn").on("click", function () {
-        connection.send($("#message").val());
-
-        $("#message").val("");
-    }
-    );
-});
-
 

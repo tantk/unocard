@@ -19,6 +19,7 @@ import Manager.GameManager;
 import entity.UNOGame;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -35,7 +36,7 @@ import javax.websocket.server.ServerEndpoint;
 
 @Dependent
 @ServerEndpoint("/gameroom/{RoomID}")
-public class WaitingRoomEndPoint {
+public class GameRoomEndPoint {
 
     @Inject
     private GameManager gamesMgr;
@@ -69,6 +70,10 @@ public class WaitingRoomEndPoint {
                         .add("cmd", "waitingRoomClient-StartGame").build();
                 connectionHandler.broadcastRoom(msgWaitinRmStart.toString(), gameID);
                 break;
+            case "ToGameRoomEndPoint-PlayerDiscard":
+                System.out.println("> gameId:" + gameID);
+                JsonObject msgPlayerDiscardCard= Json.createObjectBuilder()
+                        .add("cmd", "ToGameRoomClient-CardDiscarded").build();
 //            case "gaming":
 //                switch (json.getString("cmd")) {
 //                    case "throw":

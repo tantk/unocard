@@ -144,15 +144,7 @@ $(function ()
                                     $("#view-cards").append(gameRoomTemplate({card: result}));
                                 });
                             }
-                            $(".gameRoom").on("singletap", "li", function (event) {
-                                selectedCard= $(this).find(":input").val();
-                                        //($('input[cardIndex]').val());
-                                 //$(this).find(":input").text();
-                                
-                                console.log(selectedCard);
-                                alert(selectedCard);
 
-                            });
                         });
 
                         break;
@@ -248,6 +240,32 @@ $(function ()
         }).done(function (result)
         {
             $("#view-cards").append(gameRoomTemplate({card: result}));
+        });
+    });
+    $(".gameRoom").on("singletap", "li", function (event) {
+        selectedCard = $(this).find(":input").val();
+        //($('input[cardIndex]').val());
+        //$(this).find(":input").text();
+
+        var sendmsg = {};
+        sendmsg["cmd"] = "ToGameRoomEndPoint-PlayerDiscard";
+        sendmsg["gameID"] = gameID;
+        sendmsg["playerID"] = PlayerID;
+        sendmsg["cardID"] = selectedCard;
+        
+        $.ajax({
+            type: "Post",
+            url: "uno/game/playerDiscard",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function () {
+                //connection.send(JSON.stringify(sendmsg));
+            },
+            error: function () {
+
+                alert('cant start');
+
+            }
         });
     });
 });

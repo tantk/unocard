@@ -18,7 +18,7 @@ package resource;
 import dataTransferClass.playergamedetails;
 import Manager.GameManager;
 import com.google.gson.Gson;
-import entity.PlayerHand;
+import dataTransferClass.playerGameRoom;
 import entity.UNOGame;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
@@ -73,11 +73,23 @@ public class GameResource {
     @Produces("application/json")
     public Response getPlayerHand(final playergamedetails input) {
         System.out.print("cards given");
-        
+
         Gson gson = new Gson();
         String jsonInString = gson.toJson(gameMgr.getPlayerHandCardList(input.gameID, input.playerID));
         return Response.ok(jsonInString).build();
     }
+
+//    @POST
+//    @Path("playerDiscard")
+//    @Consumes("application/json")
+//    @Produces("application/json")
+//    public Response getPlayerHand(final playerGameRoom input) {
+//        System.out.print("cards discarded");
+//
+//        Gson gson = new Gson();
+//        String jsonInString = gson.toJson(gameMgr.getPlayerHandCardList(input.gameID, input.playerID));
+//        return Response.ok(jsonInString).build();
+//    }
 
     /**
      * Retrieves representation of an instance of resource.GameResource
@@ -114,6 +126,7 @@ public class GameResource {
         return Response.ok(jsonInString).build();
 
     }
+
     @GET
     @Path("/view/{gameid}/showTopDiscard")
     @Produces(MediaType.APPLICATION_JSON)

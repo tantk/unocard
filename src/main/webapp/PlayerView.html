@@ -26,25 +26,25 @@ limitations under the License.
         <link rel="stylesheet" href="libs/chui/chui-android-3.9.2.css">
 
         <script type = "text/x-handlebars" id ="gameTemplate">
-            
-                {{#each game}}
-                    <li class='comp'>
-                    <aside>
-                    <h3 id="gameID">{{this.gameID}}</h3></aside>
-                    <div>
-                    <h4>Game Name: {{this.gameName}}</h4>
-                    <h4>Game Status: {{this.gameStatus}}</h4>
-                    <h4>Card discarded: {{this.discardPile.numberOfCards}}</h4>
-                    <h4>Number of players: {{this.numberOfPlayer}}</h4>
-                    </div>
-                    <aside><button>Join</button></aside>
-                    </li>
-                {{/each}}
-            
+
+            {{#each game}}
+            <li class='comp'>
+            <aside>
+            <h3 id="gameID">{{this.gameID}}</h3></aside>
+            <div>
+            <h4>Game Name: {{this.gameName}}</h4>
+            <h4>Game Status: {{this.gameStatus}}</h4>
+            <h4>Card discarded: {{this.discardPile.numberOfCards}}</h4>
+            <h4>Number of players: {{this.numberOfPlayer}}</h4>
+            </div>
+            <aside><button>Join</button></aside>
+            </li>
+            {{/each}}
+
         </script>
         <script type = "text/x-handlebars" id ="waitingRoomTemplate">
-            
-        {{#each players}}
+
+            {{#each players}}
             <li class='comp'>
             <div>
             <h4>Player ID: {{this.id}}</h4>
@@ -52,25 +52,25 @@ limitations under the License.
             </div>
             <aside><button>WebSocketReady</button></aside>
             </li>
-        {{/each}}
-            
+            {{/each}}
+
         </script>
         <script type = "text/x-handlebars" id ="gameRoomTemplate">
-            
-                {{#each card}}
-                    <li class='comp'>
-                    <img src="image/uno_deck/{{this.image}}"> 
-                   <input type="hidden" name="cardIndex" value="{{this.id}}"></aside>
-                    </li>
-                {{/each}}
-            
+
+            {{#each card}}
+            <li class='comp'>
+            <img src="image/uno_deck/{{this.image}}"> 
+            <input type="hidden" name="cardIndex" value="{{this.id}}"></aside>
+            </li>
+            {{/each}}
+
         </script>
     </head>
 
     <body>
         <nav class="joinGame">
             <h1>Name: <input type="text" id="playerName" name="playerName" value="Player 1"/><input type = "button" id = "createPlayer" value = "Create Player" /><input type = "button" id = "loadlist" value = "Your username will displayed here once created" /></h1>
-            
+
         </nav>
         <article id="joinGame" class="joinGame">
 
@@ -97,12 +97,16 @@ limitations under the License.
             </section>
         </article>
         <nav class ="gameRoom">
+            <button id="gameRoom_drawCard">Draw</button>
             <h1>YourHand</h1>
+
+
             <button id="gameRoom_refreshBtn">Refresh</button>
         </nav>
 
         <article id="gameRoom" class ="gameRoom">
             <section>
+
                 <ul class="list" id="view-cards">
 
                 </ul>

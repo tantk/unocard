@@ -62,9 +62,10 @@ public class GameResource {
     @Path("startgame")
     @Consumes("application/json")
 
-    public void startGame(final playergamedetails input) {
+    public Response startGame(final playergamedetails input) {
 
         gameMgr.startGame(input.gameID);
+        return Response.ok().build();
     }
 
     @POST
@@ -78,18 +79,27 @@ public class GameResource {
         String jsonInString = gson.toJson(gameMgr.getPlayerHandCardList(input.gameID, input.playerID));
         return Response.ok(jsonInString).build();
     }
+    @POST
+    @Path("playerDrawCard")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response drawCardFromDeck(final playergamedetails input) {
+        System.out.print("cards draw");
 
-//    @POST
-//    @Path("playerDiscard")
-//    @Consumes("application/json")
-//    @Produces("application/json")
-//    public Response getPlayerHand(final playerGameRoom input) {
-//        System.out.print("cards discarded");
-//
-//        Gson gson = new Gson();
-//        String jsonInString = gson.toJson(gameMgr.getPlayerHandCardList(input.gameID, input.playerID));
-//        return Response.ok(jsonInString).build();
-//    }
+        Gson gson = new Gson();
+        String jsonInString = gson.toJson(gameMgr.drawCard(input.gameID, input.playerID));
+        return Response.ok(jsonInString).build();
+    }
+
+    @POST
+    @Path("playerDiscard")
+    @Consumes("application/json")
+    
+    public Response discardCard(final playerGameRoom input) {
+        System.out.print("cards discarded");
+        gameMgr.discardCard(input.getGameID(),input.getPlayerID(), input.getCardID());
+        return Response.ok().build();
+    }
 
     /**
      * Retrieves representation of an instance of resource.GameResource
@@ -142,10 +152,11 @@ public class GameResource {
     @Path("joingame")
     @Consumes("application/json")
 
-    public void joinGame(final playergamedetails input) {
+    public Response joinGame(final playergamedetails input) {
         System.out.print(input.gameID);
         System.out.print(input.playerID);
         gameMgr.addPlayer(input.gameID, input.playerID);
+        return Response.ok().build();
     }
 
     /**

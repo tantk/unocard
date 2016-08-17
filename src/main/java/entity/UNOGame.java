@@ -78,10 +78,11 @@ public class UNOGame {
         p.drawCardFrom(this.gameDeck);
     }
 
-    public Card discardCard(Player p, Card c) {
-        this.discardPile.cardList.add(c);
-        p.removeCardTo(c.getId(), this.discardPile);
-        return c;
+    public Card discardCard(Player p, int cardID) {
+        
+        
+        return p.removeCardTo(cardID, this.discardPile);
+        
     }
 
     //assume draw first card from discardpile
@@ -106,7 +107,7 @@ public class UNOGame {
             }
         }
         //form discardpile
-        this.discardPile.cardList.add(this.gameDeck.removeCard());
+        
         this.discardPile.cardList.add(this.gameDeck.removeCard());
         //System.out.println("Game ID:" + this.getGameID());
         //assume random player start first,get starting player:

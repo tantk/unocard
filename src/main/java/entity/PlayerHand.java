@@ -18,11 +18,13 @@ public class PlayerHand extends pileOfCards {
     }
 
     public int getHandValue() {
-        int value=0;
+        int value = 0;
         for (Card c : this.cardList) {
-            value+=c.getScore();
+            value += c.getScore();
         }
         return value;
     }
-    
+
+   
+
 }

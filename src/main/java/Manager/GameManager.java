@@ -31,8 +31,8 @@ public class GameManager {
     private Map<String, UNOGame> globalUnoGames = new HashMap<>();
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    @PersistenceContext
-    private EntityManager em;
+   // @PersistenceContext
+   // private EntityManager em;
 
     public UNOGame createGame(String gameName) {
         UNOGame newGame = new UNOGame();
@@ -85,4 +85,16 @@ public class GameManager {
     {
         return globalUnoGames.get(gameID);
     }
+    public void discardCard(String gameID,String playerID, int cardID)
+    {
+        Player p = playerMgr.getGlobalPlayers().get(playerID);
+        globalUnoGames.get(gameID).discardCard(p, cardID);
+    }
+    public LinkedList drawCard(String gameID,String playerID)
+    {
+        Player p = playerMgr.getGlobalPlayers().get(playerID);
+        globalUnoGames.get(gameID).playerDrawCardFromDeck(p);
+        return globalUnoGames.get(gameID).getPlayerHand(playerID).getCardList();
+    }
+            
 }

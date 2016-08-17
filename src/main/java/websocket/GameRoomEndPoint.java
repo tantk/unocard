@@ -69,11 +69,24 @@ public class GameRoomEndPoint {
                 JsonObject msgWaitinRmStart = Json.createObjectBuilder()
                         .add("cmd", "waitingRoomClient-StartGame").build();
                 connectionHandler.broadcastRoom(msgWaitinRmStart.toString(), gameID);
+                System.out.println("broadcastRoom to start game");
                 break;
             case "ToGameRoomEndPoint-PlayerDiscard":
                 System.out.println("> gameId:" + gameID);
-                JsonObject msgPlayerDiscardCard= Json.createObjectBuilder()
+                JsonObject msgPlayerDiscardCard = Json.createObjectBuilder()
                         .add("cmd", "ToGameRoomClient-CardDiscarded").build();
+                connectionHandler.broadcastRoom(msgPlayerDiscardCard.toString(), gameID);
+                System.out.println("broadcastRoom to discard");
+                break;
+            case "ToGameRoomEndPoint_Playerdrawn":
+                System.out.println("> gameId: drawn " + gameID);
+                JsonObject msgPlayerDrawnCard = Json.createObjectBuilder()
+                        .add("cmd", "ToGameRoomClient_Playerdrawn").build();
+                connectionHandler.broadcastRoom(msgPlayerDrawnCard.toString(), gameID);
+                System.out.println("broadcastRoom to drawn");
+                break;
+                
+               
 //            case "gaming":
 //                switch (json.getString("cmd")) {
 //                    case "throw":
@@ -141,7 +154,7 @@ public class GameRoomEndPoint {
 //                break;
             default:
                 //RoomIDs.broadcast(RoomID, json);
-                System.out.println("msg switch not matched!!!");
+                System.out.println("msg switch not matched!!!" + msg);
                 break;
         }
 

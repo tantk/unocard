@@ -34,6 +34,7 @@ $(function () {
             
             imgList = '<img src= "image/uno_deck/' +showdiscard.image +'">';
             alert(imgList);
+            $('#discardTopCard').empty();
             $('#discardTopCard').append(imgList);
             $("#discardTopCard").append("<img src=image/back.png>");
 

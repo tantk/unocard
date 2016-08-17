@@ -141,15 +141,60 @@ $(function ()
                                     }
                                 }).done(function (result)
                                 {
-                                    $("#view-cards").append(gameRoomTemplate({card: result}));
+                                    $("#view-cards").empty();
+                                    $("#view-cards").prepend(gameRoomTemplate({card: result}));
                                 });
                             }
-
                         });
-
                         break;
-                }
+                    case 'ToGameRoomClient-CardDiscarded':
 
+                        var data = {};
+                        data["gameID"] = gameID;
+                        data["playerID"] = PlayerID;
+                        $.ajax({
+                            type: "Post",
+                            url: "uno/game/getplayerhand",
+                            contentType: "application/json",
+                            data: JSON.stringify(data),
+                            success: function () {
+                                alert('got cards');
+                            },
+                            error: function () {
+
+                                alert('cant start');
+
+                            }
+                        }).done(function (result)
+                        {
+                            $("#view-cards").empty();
+                            $("#view-cards").prepend(gameRoomTemplate({card: result}));
+                        });
+                    case 'ToGameRoomClient_Playerdrawn':
+
+                        var data = {};
+                        data["gameID"] = gameID;
+                        data["playerID"] = PlayerID;
+                        $.ajax({
+                            type: "Post",
+                            url: "uno/game/getplayerhand",
+                            contentType: "application/json",
+                            data: JSON.stringify(data),
+                            success: function () {
+                                alert('got cards');
+                            },
+                            error: function () {
+
+                                alert('cant start');
+
+                            }
+                        }).done(function (result)
+                        {
+                            $("#view-cards").empty();
+                            $("#view-cards").prepend(gameRoomTemplate({card: result}));
+                        });
+                        
+                }
             }
 
             function onOpen(event) {
@@ -180,17 +225,6 @@ $(function ()
             $('#wait_game_player_count').html(keys.length);
 
         });
-
-        function updateGameStatus() {
-            $.getJSON('uno/game/view/' + gameID + '/status', function (status) {
-
-                var gameStatus = status;
-
-                if (gameStatus === "started") {
-                    $.UIGoToArticle("#gameRoom");
-                }
-            });
-        }
     });
 
     $("#wait_game_startBtn").on("singletap", function startGame()
@@ -239,7 +273,8 @@ $(function ()
             }
         }).done(function (result)
         {
-            $("#view-cards").append(gameRoomTemplate({card: result}));
+            $("#view-cards").empty();
+            $("#view-cards").prepend(gameRoomTemplate({card: result}));
         });
     });
     $(".gameRoom").on("singletap", "li", function (event) {
@@ -252,21 +287,49 @@ $(function ()
         sendmsg["gameID"] = gameID;
         sendmsg["playerID"] = PlayerID;
         sendmsg["cardID"] = selectedCard;
-        
+
         $.ajax({
             type: "Post",
             url: "uno/game/playerDiscard",
             contentType: "application/json",
-            data: JSON.stringify(data),
+            data: JSON.stringify(sendmsg),
             success: function () {
-                //connection.send(JSON.stringify(sendmsg));
+                connection.send(JSON.stringify(sendmsg));
             },
             error: function () {
 
-                alert('cant start');
-
+                alert('cant discard');
             }
         });
     });
+    $("#gameRoom_drawCard").on("singletap", function drawCard()
+    {
+        var data = {};
+        data["gameID"] = gameID;
+        data["playerID"] = PlayerID;
+        $.ajax({
+            type: "Post",
+            url: "uno/game/playerDrawCard",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function () {
+                alert('drawn');
+            },
+            error: function () {
+
+                alert('cant draw');
+
+            }
+        }).done(function ()
+        {
+            var data = {};
+            data["cmd"] = "ToGameRoomEndPoint_Playerdrawn";
+            data["gameID"] = gameID;
+            data["playerID"] = PlayerID;
+            connection.send(JSON.stringify(data));
+
+        });
+    });
+
 });
 

@@ -18,7 +18,7 @@ import javax.json.JsonObject;
 public class Player {
 
     public Player(String name) {
-        
+
         this.id = UUID.randomUUID().toString().substring(0, 4);
         this.name = name;
         this.playerHand = new PlayerHand();
@@ -57,18 +57,16 @@ public class Player {
     }
 
     public Card removeCardTo(int cardID, pileOfCards piles) {
-        int indexN = 0;
+        Card discarded = new Card();
         for (Card c : this.playerHand.cardList) {
-            int i = 0;
             if (c.getId() == cardID) {
-                indexN = i;
+                discarded = c;
+                
             }
-            i++;
         }
-        Card cardPlayed = this.playerHand.cardList.get(indexN);
-        this.playerHand.cardList.remove(indexN);
-        piles.cardList.add(cardPlayed);
-        return cardPlayed;
+        this.playerHand.cardList.remove(discarded);
+        piles.cardList.add(discarded);
+        return discarded;
     }
 
     public void showPlayerHand() {
@@ -84,11 +82,8 @@ public class Player {
         removeCardTo(utility.randInt(0, (this.playerHand.cardList.size() - 1)), pile);
     }
 
+    public JsonObject playerToJson() {
+        return Json.createObjectBuilder().add("id", this.id).add("name", this.name).add("hand", this.playerHand.cardsToJsonArray()).build();
 
-    
-public JsonObject playerToJson()
-{
-    return Json.createObjectBuilder().add("id",this.id).add("name", this.name).add("hand",this.playerHand.cardsToJsonArray()).build();
-            
-}
+    }
 }

@@ -19,7 +19,6 @@ import Manager.GameManager;
 import entity.UNOGame;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.HashMap;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -85,73 +84,7 @@ public class GameRoomEndPoint {
                 connectionHandler.broadcastRoom(msgPlayerDrawnCard.toString(), gameID);
                 System.out.println("broadcastRoom to drawn");
                 break;
-                
-               
-//            case "gaming":
-//                switch (json.getString("cmd")) {
-//                    case "throw":
-//                        Player player = thisGame.findPlayer(json.getString("player"));
-//                        Card card = player.findCard(json.getString("card"));
-//                        GameEngine.throwOneCard(player, card, thisGame.getDisPipe());
-//                        //check if someone wins
-//                        Player winner = GameEngine.checkWinner(thisGame);
-//                        if (winner != null) {
-//                            //some one wins
-//                            GameEngine.markWinner(thisGame, winner);
-//                            JsonObject msg_update = Json.createObjectBuilder()
-//                                    .add("msg", "gaming")
-//                                    .add("cmd", "endRound")
-//                                    .add("winner", winner.geroomID())
-//                                    .add("score", winner.getScore())
-//                                    .build();
-//                            RoomIDs.broadcast(roomID, msg_update);
-//                            return;
-//                        }
-//
-//                        //update Status
-//                        JsonObject msg_update = Json.createObjectBuilder()
-//                                .add("msg", "gaming")
-//                                .add("cmd", "updateGame")
-//                                .add("Cards", thisGame.card2Json())
-//                                .build();
-//                        RoomIDs.broadcast(roomID, msg_update);
-//                        break;
-//                    case "undo":
-//                        thisGame.getDisPipe().returnOneCard();
-//                        JsonObject msg_undo = Json.createObjectBuilder()
-//                                .add("msg", "gaming")
-//                                .add("cmd", "updateGame")
-//                                .add("Cards", thisGame.card2Json())
-//                                .build();
-//                        RoomIDs.broadcast(roomID, msg_undo);
-//                        break;
-//                    case "draw":
-//                        Player draw_player = thisGame.findPlayer(json.getString("player"));
-//                        GameEngine.drawOneCard(draw_player,
-//                                thisGame.getDrawPipe(), thisGame.getDisPipe());
-//                        JsonObject msg_draw = Json.createObjectBuilder()
-//                                .add("msg", "gaming")
-//                                .add("cmd", "updateGame")
-//                                .add("Cards", thisGame.card2Json())
-//                                .build();
-//                        RoomIDs.broadcast(roomID, msg_draw);
-//                        break;
-//                    case "restart":
-//                        thisGame.clearTable();
-//                        GameEngine.initGame(thisGame);
-//                        JsonObject msg_begin = Json.createObjectBuilder()
-//                                .add("msg", "gaming")
-//                                .add("cmd", "initGame")
-//                                .add("Cards", thisGame.card2Json())
-//                                .build();
-//                        System.out.println(msg_begin);
-//                        RoomIDs.broadcast(roomID, msg_begin);
-//                        break;
-//                    default:
-//                        System.out.println("cmd switch not matched!!!");
-//                }
-//
-//                break;
+
             default:
                 //RoomIDs.broadcast(RoomID, json);
                 System.out.println("msg switch not matched!!!" + msg);
@@ -169,6 +102,7 @@ public class GameRoomEndPoint {
         JsonObject msg = Json.createObjectBuilder()
                 .add("cmd", "getPlayerInfo").build();
         try {
+            
             session.getBasicRemote().sendText(msg.toString());
         } catch (IOException ex) {
         }

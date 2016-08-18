@@ -18,18 +18,19 @@ Version: 3.8.0
 */
 
 label {
-    font-family: Luminari;
+    font-family: Khmer UI,Luminari;
     color: black;
-    
-}
-.bg{
-    background: url(../img/unspecified.png) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
 
 }
+/*.bg{  
+    background-image: url(../image/player.jpg);
+    background-color: #fe0000;
+    background-size:contain;
+    background-repeat: no-repeat;
+    -webkit-background-origin:content-box;
+    width: 100%;
+    height: auto;
+}*/
 
 /*
   Flex parameters:
@@ -56,9 +57,7 @@ body {
     -webkit-font-smoothing: subpixel-antialiased;
 }
 body {
-    /* Change background color for your app: */
 
-    /* background-color: #fafafa;*/
     -webkit-user-select: none;
     -webkit-tap-highlight-color: transparent;
 }
@@ -115,7 +114,7 @@ option,
 textarea,
 menu,
 body {
-    font: 100 14px/18px Luminari, Roboto, SegoeWP, HelveticaNeue, sans-serif;
+    font: 100 14px/18px Khmer UI, Luminari, Roboto, SegoeWP, HelveticaNeue, sans-serif;
 }
 /* ==============================
    Article (view) styles
@@ -208,7 +207,7 @@ html[dir=rtl] .previous {
 }
 article > section,
 .scroller-vertical {
-    padding-top: 10px;
+    padding-top: 100px;
     padding-bottom: 100px;
     min-height: 100%;
     width: 100%;
@@ -216,12 +215,13 @@ article > section,
 article > section > :last-child::after,
 .scroller-vertical > :last-child::after {
     margin-bottom: 100px;
+
 }
 /* ==============================
    Horizontal Panels
    =========================== */
 .vertical,
-li.comp > aside.vertical {
+li. > aside.vertical {
     display: -moz-box;
     display: flex;
     display: -webkit-flex;
@@ -332,7 +332,7 @@ button {
     text-decoration: none;
     padding: 12px 20px 10px;
     text-transform: uppercase;
-    font-family: Luminari, HeveticaNeue, Sans-serif;
+    font-family: Khmer UI,Luminari, HeveticaNeue, Sans-serif;
     border-radius: 2px;
     -webkit-transition: all 0.35s ease-out;
     -moz-transition: all 0.35s ease-out;
@@ -466,8 +466,9 @@ html[dir=rtl] button.align-flush {
     padding: 0 5px;
 }
 nav {
-   
+
     height: 50px;
+
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -745,8 +746,8 @@ li[data-show-article].touched .nav::after,
    List title
    =========================== */
 section h2 {
-    font: normal 11pt/12pt 'Roboto Regular', SegoeWP, HelveticaNeue, Sans-serif;
-    color: #4d4d4d;
+    font: normal 17pt/18pt 'Roboto Regular', SegoeWP, HelveticaNeue, Sans-serif;
+    color: #ff1022;
     margin: 26px 0 6px 0;
     padding-left: 16px;
     text-transform: uppercase;
@@ -754,6 +755,7 @@ section h2 {
     overflow: hidden;
     text-overflow: ellipsis;
     padding-bottom: 6px;
+
 }
 section h2.normal-case {
     text-transform: none;
@@ -3084,16 +3086,16 @@ html[dir=rtl] .pagination > li:last-of-type {
     margin-left: 0;
 }
 .horizontal-scroll-panel {
-    width: 100%;
-    height: 200px;
-    background-color: #ccc;
-    padding: 20px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    overflow-y: hidden !important;
-    overflow-x: auto;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(225, 225, 225, 0.75);
+  padding: 20px;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-y: hidden !important;
+  overflow-x: scroll;
+  white-space: nowrap;
+  box-sizing: border-box;
 }
 .horizontal-scroll-panel > ul {
     list-style: none;
@@ -3101,13 +3103,12 @@ html[dir=rtl] .pagination > li:last-of-type {
     padding: 0;
     -webkit-padding-start: 0;
     font-size: 0;
+    width: 100%;
 }
 .horizontal-scroll-panel > ul li {
     display: inline-block;
-    border: solid 1px #666;
-    box-shadow: 0 0 4px #666;
-    width: 200px;
-    height: 200px;
+    width: 170px;
+    height: 100%;
     overflow: hidden;
     margin-right: 20px;
     font-size: 0;
@@ -3122,7 +3123,7 @@ body.isWindows .horizontal-scroll-panel {
     background-color: #333;
 }
 [dir=rtl] .horizontal-scroll-panel {
-    margin-right: -20px;
+    margin-right: 0;
     padding-right: 20px;
 }
 [dir=rtl] .horizontal-scroll-panel li {
@@ -3132,9 +3133,11 @@ body.isWindows .horizontal-scroll-panel {
 }
 [dir=rtl] .horizontal-scroll-panel li:first-of-type {
     margin-right: 0 !important;
+    margin-left: 20px !important;
 }
 [dir=rtl] .horizontal-scroll-panel li:last-of-type {
-    margin-left: 0 !important;
+    margin-left: 20px !important;
+    margin-right: 0 !important;
 }
 [dir=rtl] body.isWindows .horizontal-scroll-panel li {
     float: right;

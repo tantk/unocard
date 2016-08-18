@@ -18,12 +18,15 @@
 var PlayerID;
 var gameID;
 var connection = null;
+
 var selectedCard;
+
 $(function ()
 {
+
     $("#createPlayer").click(function (event) {
         $.getJSON('uno/player/create/' + $('#playerName').val(), function (jd) {
-            $('#loadlist').val(jd + " has been created");
+            $('#loadlist').val(jd + " has been created,click here to refresh");
             PlayerID = jd;
             alert("player created");
         });
@@ -37,23 +40,22 @@ $(function ()
     var gameTemplate = Handlebars.compile($("#gameTemplate").html());
     var waitingRoomTemplate = Handlebars.compile($("#waitingRoomTemplate").html());
     var gameRoomTemplate = Handlebars.compile($("#gameRoomTemplate").html());
+    var playerList = Handlebars.compile($("#playerList").html());
     $("#loadlist").on("singletap", function ()
     {
         $("#view-games").empty();
-        var getAllGames = $.getJSON("uno/game/viewall");
+        var getAllGames = $.getJSON("uno/game/viewavailable");
         getAllGames.done(function (result)
         {
             $("#view-games").append(gameTemplate({game: result}));
         });
-
-
 
     });
     $("#view-games").on('singletap', 'li', function () {
 
 
         gameID = $(this).find("h3").text();
-        alert(gameID);
+
         var data = {};
         data["gameID"] = gameID;
         data["playerID"] = PlayerID;
@@ -76,7 +78,7 @@ $(function ()
 
         $(function () {
             var RoomID = gameID;
-            alert(RoomID);
+
 
 
             connection = new WebSocket('ws://localhost:8080/unocard/gameroom/' + RoomID);
@@ -134,7 +136,7 @@ $(function ()
                                     contentType: "application/json",
                                     data: JSON.stringify(data),
                                     success: function () {
-                                        alert('got cards');
+                                        console.log("got cards");
                                     },
                                     error: function () {
                                         alert('cant start: game has already started or player is not created properly');
@@ -143,6 +145,15 @@ $(function ()
                                 {
                                     $("#view-cards").empty();
                                     $("#view-cards").prepend(gameRoomTemplate({card: result}));
+                                });
+                                $.getJSON('uno/game/view/' + gameID + '/showTopDiscard', function (showdiscard) {
+
+                                    imgList = '<img src= "image/uno_deck/' + showdiscard.image + '">';
+
+                                    $('#discardTopCard').empty();
+                                    $('#discardTopCard').append(imgList);
+                                    $("#discardTopCard").append("<img src=image/back.png>");
+
                                 });
                             }
                         });
@@ -158,7 +169,7 @@ $(function ()
                             contentType: "application/json",
                             data: JSON.stringify(data),
                             success: function () {
-                                alert('got cards');
+                                console.log("discard cards");
                             },
                             error: function () {
 
@@ -170,6 +181,25 @@ $(function ()
                             $("#view-cards").empty();
                             $("#view-cards").prepend(gameRoomTemplate({card: result}));
                         });
+
+                        $.getJSON("uno/game/view/" + gameID).done(function (result) {
+                            var player = playerList({player: result});
+                            $("#playerDiv").empty();
+                            $("#playerDiv").append(player);
+
+                        });
+                        // 
+                        $.getJSON('uno/game/view/' + gameID + '/showTopDiscard', function (showdiscard) {
+
+                            imgList = '<img src= "image/uno_deck/' + showdiscard.image + '">';
+
+                            $('#discardTopCard').empty();
+                            $('#discardTopCard').append(imgList);
+                            $("#discardTopCard").append("<img src=image/back.png>");
+
+                        }
+                        );
+                        break;
                     case 'ToGameRoomClient_Playerdrawn':
 
                         var data = {};
@@ -181,7 +211,7 @@ $(function ()
                             contentType: "application/json",
                             data: JSON.stringify(data),
                             success: function () {
-                                alert('got cards');
+                                console.log("got cards");
                             },
                             error: function () {
 
@@ -193,7 +223,9 @@ $(function ()
                             $("#view-cards").empty();
                             $("#view-cards").prepend(gameRoomTemplate({card: result}));
                         });
-                        
+
+                        break;
+
                 }
             }
 
@@ -239,6 +271,23 @@ $(function ()
             data: JSON.stringify(data),
             success: function () {
                 $.UIGoToArticle("#gameRoom");
+
+                $.getJSON("uno/game/view/" + gameID).done(function (result) {
+                    var player = playerList({player: result});
+                    $("#playerDiv").empty();
+                    $("#playerDiv").append(player);
+
+                });
+                // 
+                $.getJSON('uno/game/view/' + gameID + '/showTopDiscard', function (showdiscard) {
+
+                    imgList = '<img src= "image/uno_deck/' + showdiscard.image + '">';
+
+                    $('#discardTopCard').empty();
+                    $('#discardTopCard').append(imgList);
+                    $("#discardTopCard").append("<img src=image/back.png>");
+
+                });
             },
             error: function () {
 
@@ -264,7 +313,7 @@ $(function ()
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function () {
-                alert('got cards');
+
             },
             error: function () {
 
@@ -276,6 +325,7 @@ $(function ()
             $("#view-cards").empty();
             $("#view-cards").prepend(gameRoomTemplate({card: result}));
         });
+
     });
     $(".gameRoom").on("singletap", "li", function (event) {
         selectedCard = $(this).find(":input").val();
@@ -313,7 +363,7 @@ $(function ()
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function () {
-                alert('drawn');
+
             },
             error: function () {
 
@@ -331,5 +381,40 @@ $(function ()
         });
     });
 
+
+
+//    (function () {
+//        var canvas = document.getElementById('playingField'),
+//                context = canvas.getContext('2d');
+//
+//        // resize the canvas to fill browser window dynamically
+//        window.addEventListener('resize', resizeCanvas, false);
+//
+//        function resizeCanvas() {
+//            canvas.width = window.innerWidth;
+//            canvas.height = 0.63*window.innerHeight;
+//
+//            /**
+//             * Your drawings need to be inside this function otherwise they will be reset when 
+//             * you resize the browser window and the canvas goes will be cleared.
+//             */
+//            drawStuff();
+//        }
+//        resizeCanvas();
+//
+//        function drawStuff() {
+//            // do your drawing stuff here
+//            function draw() {
+//                var canvas = document.getElementById('playingField');
+//                if (canvas.getContext) {
+//                    var ctx = canvas.getContext('2d');
+//                }
+//            }
+//        }
+//    })();
+    var width = $(window).width();
+    $("#playingField").width(width);
+    var height = $(window).height() * 0.4;
+    $("#playingField").height(height);
 });
 

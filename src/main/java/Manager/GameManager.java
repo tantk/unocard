@@ -26,13 +26,13 @@ import javax.persistence.PersistenceContext;
 @ApplicationScoped
 public class GameManager {
 
-    @Inject 
+    @Inject
     private PlayerManager playerMgr;
     private Map<String, UNOGame> globalUnoGames = new HashMap<>();
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-   // @PersistenceContext
-   // private EntityManager em;
+    // @PersistenceContext
+    // private EntityManager em;
 
     public UNOGame createGame(String gameName) {
         UNOGame newGame = new UNOGame();
@@ -52,49 +52,60 @@ public class GameManager {
         return jsonInString;
     }
 
+    public String getAvailableGameJson() {
+        Gson gson = new Gson();
+        LinkedList<UNOGame> availablegame = new LinkedList<>();
+        for (Map.Entry<String, UNOGame> game : globalUnoGames.entrySet()) {
+            if(game.getValue().getGameStatus().toString().equals("waiting"))
+                    {availablegame.add(game.getValue());}
+        }
+        
+
+        String jsonInString = gson.toJson(availablegame);
+        return jsonInString;
+    }
+
     public Player addPlayer(String gameID, String playerID) {
         Player p = playerMgr.getGlobalPlayers().get(playerID);
         //if static Manager.PlayerManager.getGlobalPlayers().get(playerID);
         globalUnoGames.get(gameID).addPlayerToGame(p);
         return p;
     }
-    public List getPlayerList(String gameID)
-    {
+
+    public List getPlayerList(String gameID) {
         return globalUnoGames.get(gameID).getPlayerList();
     }
-    public String getStatus(String gameID)
-    {
-    return globalUnoGames.get(gameID).getGameStatus().toString();
+
+    public String getStatus(String gameID) {
+        return globalUnoGames.get(gameID).getGameStatus().toString();
     }
-    public void startGame(String gameID)
-    {
-    globalUnoGames.get(gameID).changeToStarted();
-    globalUnoGames.get(gameID).setupGame();
+
+    public void startGame(String gameID) {
+        globalUnoGames.get(gameID).changeToStarted();
+        globalUnoGames.get(gameID).setupGame();
     }
-    public LinkedList getPlayerHandCardList(String gameID,String playerID)
-            
-    {
+
+    public LinkedList getPlayerHandCardList(String gameID, String playerID) {
         return globalUnoGames.get(gameID).getPlayerHand(playerID).getCardList();
     }
-    public Card showTopDiscard(String gameID)
-            
-    {
+
+    public Card showTopDiscard(String gameID) {
         return globalUnoGames.get(gameID).getDiscardPile().showTopCard();
     }
-    public UNOGame getGame(String gameID)        
-    {
+
+    public UNOGame getGame(String gameID) {
         return globalUnoGames.get(gameID);
     }
-    public void discardCard(String gameID,String playerID, int cardID)
-    {
+
+    public void discardCard(String gameID, String playerID, int cardID) {
         Player p = playerMgr.getGlobalPlayers().get(playerID);
         globalUnoGames.get(gameID).discardCard(p, cardID);
     }
-    public LinkedList drawCard(String gameID,String playerID)
-    {
+
+    public LinkedList drawCard(String gameID, String playerID) {
         Player p = playerMgr.getGlobalPlayers().get(playerID);
         globalUnoGames.get(gameID).playerDrawCardFromDeck(p);
         return globalUnoGames.get(gameID).getPlayerHand(playerID).getCardList();
     }
-            
+
 }

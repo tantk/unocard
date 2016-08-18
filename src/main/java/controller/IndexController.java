@@ -42,7 +42,7 @@ public class IndexController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/CreateGame.jsp").forward(request, response);
+        request.getRequestDispatcher("/CreateGame.html").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -69,34 +69,4 @@ public class IndexController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-//        JsonObject data = new Gson().fromJson(request.getParameter("data"), JsonObject.class);
-//        String gameName = data.get("gameName").toString();
-//        String playerName = data.get("playerName").toString();
-//    
-//        System.out.print(gameName);
-//        System.out.print(playerName);
-        System.out.print("got here");
-
-        //String playerName = request.getParameter("playerName");
-        String gameName = request.getParameter("gameName");
-        UNOGame game = gameMgr.createGame(gameName);
-        // playerMgr.createPlayer(playerName);
-
-        request.setAttribute("game", game);
-        request.getRequestDispatcher("waitingRoom.jsp").forward(request, response);
-//         Gson gson = new Gson();
-//        String jsonInString = gson.toJson(game);
-//        
-//       response.setContentType("text/html;charset=UTF-8");
-//        try (PrintWriter out = response.getWriter()) {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println(jsonInString);
-
-    }
-
 }
-
-

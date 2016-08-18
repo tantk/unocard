@@ -114,6 +114,14 @@ public class GameResource {
         return Response.ok(gameMgr.getAllGamesJSon()).build();
 
     }
+    @GET
+    @Path("/viewavailable")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response seeAvailableGame() {
+        //TODO return proper representation object
+        return Response.ok(gameMgr.getAvailableGameJson()).build();
+
+    }
 
     @GET
     @Path("/view/{gameid}")

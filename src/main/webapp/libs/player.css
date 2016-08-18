@@ -1,0 +1,34 @@
+body{
+
+    background: url(../image/player.jpg) no-repeat 50% 50%;
+    background-color: #fe0000;
+    background-size:contain;
+    
+    -webkit-background-origin:content-box;
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+#player{
+    width: 400px;
+    height: 500px;
+}
+/*#newgame{ 
+    text-align: center;
+    border: solid #ffffff 5px;
+    border-radius: 10px;
+    width: 400px;
+    height: 500px;
+    margin: 5% 32% 30%;
+    font-family: Homestead;
+    background-color: rgba(0,0,0,0.4);
+}*/
+#player .joinGame h1{
+    padding: 20% 0 0 0;
+    margin-bottom: 20%;
+}
+#player .joinGame button{
+    margin-top: 5%;
+}
+

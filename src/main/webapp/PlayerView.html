@@ -23,7 +23,11 @@ limitations under the License.
         <script src="libs/handlebar/handlebars-v4.0.5.js"></script>
         <script src="libs/chui/chui-3.9.2.js"></script>
         <script src="playerview.js"></script>
+        <link rel="stylesheet" href="libs/player.css">
+        <link rel="stylesheet" href="libs/button.css">
+
         <link rel="stylesheet" href="libs/chui/chui-android-3.9.2.css">
+        <link rel="stylesheet" href="playingField.css">
 
         <script type = "text/x-handlebars" id ="gameTemplate">
 
@@ -37,7 +41,7 @@ limitations under the License.
             <h4>Card discarded: {{this.discardPile.numberOfCards}}</h4>
             <h4>Number of players: {{this.numberOfPlayer}}</h4>
             </div>
-            <aside><button>Join</button></aside>
+            <aside><button  class="button button-raised button-pill button-inverse">Join</button></aside>
             </li>
             {{/each}}
 
@@ -50,7 +54,7 @@ limitations under the License.
             <h4>Player ID: {{this.id}}</h4>
             <h4>Player Name: {{this.name}}</h4>
             </div>
-            <aside><button>WebSocketReady</button></aside>
+            
             </li>
             {{/each}}
 
@@ -58,10 +62,22 @@ limitations under the License.
         <script type = "text/x-handlebars" id ="gameRoomTemplate">
 
             {{#each card}}
-            <li class='comp'>
+            <li>
             <img src="image/uno_deck/{{this.image}}"> 
             <input type="hidden" name="cardIndex" value="{{this.id}}"></aside>
             </li>
+            {{/each}}
+
+        </script>
+        <script type = "text/x-handlebars" id ="playerList">
+
+            {{#each player}}
+            <div>
+            <img src="image/defaultavatar.png" height="42" width="42" align="middle">
+            <a>{{this.name}}</a>
+            <a>{{this.id}}</a>
+            </div>
+
             {{/each}}
 
         </script>
@@ -69,13 +85,16 @@ limitations under the License.
 
     <body>
         <nav class="joinGame">
-            <h1>Name: <input type="text" id="playerName" name="playerName" value="Player 1"/><input type = "button" id = "createPlayer" value = "Create Player" /><input type = "button" id = "loadlist" value = "Your username will displayed here once created" /></h1>
+            <h1>Name: <input type="text" id="playerName" name="playerName" value="Player 1"/>
+                <input class="button button-glow button-rounded button-caution" type = "button" id = "createPlayer" value = "Create Player" />
+                <input class="button button-glow button-rounded button-caution" type = "button" id = "loadlist" value = "Your username will displayed here once created" /></h1>
 
         </nav>
         <article id="joinGame" class="joinGame">
 
             <section>
                 <h2>List of games</h2>
+                
                 <ul class="list" id ="view-games">
 
                 </ul>
@@ -92,7 +111,7 @@ limitations under the License.
 
                 </ul>
                 <p>
-                    <button type="button" id="wait_game_startBtn">Start</button>
+                    <button class="button button-raised button-pill button-inverse" type="button" id="wait_game_startBtn">Start</button>
                 </p>
             </section>
         </article>
@@ -104,15 +123,20 @@ limitations under the License.
             <button id="gameRoom_refreshBtn">Refresh</button>
         </nav>
 
-        <article id="gameRoom" class ="gameRoom">
-            <section>
+        <article id="gameRoom" class ="gameRoom" onload="draw();">
+            <section  >
+                <div id="playingField" class="rcorners2">
+                    <div class="flex-container" id ="playerDiv">
 
-                <ul class="list" id="view-cards">
+                    </div>
+                    <br>
+                    <div >Uno with friends discard image front and back<br><span id="discardTopCard"></span></div>
+                </div>
+                <div class='horizontal-scroll-panel'>
+                    <ul id="view-cards">
 
-                </ul>
-                <p>
-
-                </p>
+                    </ul>
+                </div>
             </section>
         </article>
 

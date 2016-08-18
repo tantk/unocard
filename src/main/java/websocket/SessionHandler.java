@@ -29,7 +29,7 @@ import javax.websocket.Session;
 @ApplicationScoped
 
 public class SessionHandler {
-
+//global room is assumed to be 000000
     private final List<Session> allSessions = new LinkedList<>();
     private final HashMap<String, LinkedList<Session>> sessionRoom = new HashMap<>();
 
@@ -64,4 +64,6 @@ public class SessionHandler {
 
         }
     }
+    //we have assummed session global to be 000000 in string
+    
 }

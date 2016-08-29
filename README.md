@@ -3,6 +3,7 @@
 deployed on aws for illustration
 
 http://default-environment.c7kwpuxtai.us-west-2.elasticbeanstalk.com/CreateGame.html
+
 http://default-environment.c7kwpuxtai.us-west-2.elasticbeanstalk.com/PlayerView.html
 
 It is our course assignment to create a Uno card game with JAVA EE as the backend and html5 chocolatechip ui as the client.
@@ -25,4 +26,5 @@ PlayerView.html (support multiple player to a single game)
 
 Look and feel of our webapp:
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/adh9D"><a href="//imgur.com/adh9D"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+![alt tag](http://i.imgur.com/4BKYdiw.png?1)

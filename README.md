@@ -1,6 +1,6 @@
 # unocard game 
 
-deployed on aws for illustration
+Deployed on aws for illustration
 
 http://default-environment.c7kwpuxtai.us-west-2.elasticbeanstalk.com/CreateGame.html
 
@@ -13,16 +13,10 @@ The webapp also make use of java ee's websocket and sass css preprocessor.
 What the web app can do :
 
 CreateGame.html (support multiple game)
-1. create game 
-2. view created card game
-3. Force Start a Game
+Create game,View created game,Force Start a Game
 
 PlayerView.html (support multiple player to a single game)
-3. Create Player
-4. Join Game
-5. Start Game
-6. Draw Card
-7. Discard Card
+Create Player,Join Game,Start Game,Draw Card,Discard Card
 
 
 Look and feel of our webapp:

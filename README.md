@@ -22,3 +22,7 @@ PlayerView.html (support multiple player to a single game)
 5. Start Game
 6. Draw Card
 7. Discard Card
+
+Look and feel of our webapp:
+
+![alt tag](http://imgur.com/a/adh9D)

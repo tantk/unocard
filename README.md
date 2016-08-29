@@ -25,4 +25,4 @@ PlayerView.html (support multiple player to a single game)
 
 Look and feel of our webapp:
 
-![alt tag](http://imgur.com/a/adh9D)
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/adh9D"><a href="//imgur.com/adh9D"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>

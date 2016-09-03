@@ -24,7 +24,7 @@ There is no database, data is applicationscoped and stored in memory.
 * Handlebar
 
 ##Deployment
-* Researched various cloud platform like heroku,aws and openshift.
+Researched various cloud platform like heroku,aws and openshift.
 Chosen aws because of the preconfigured docker. We would have used heroku otherwise as its free for single dynos. But we are still figuring out docker configuration for glassfish.
 
 Deployed on aws for illustration:

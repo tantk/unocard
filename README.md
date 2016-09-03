@@ -15,13 +15,13 @@ There is no database, data is applicationscoped and stored in memory.
 * Maven
 
 ##Front-end
-*Javascript
-*Websocket
-*Ajax getpost in json
-*css (sass preprocessor)
-*html5
-*chocolatechipUI
-*handlebar
+* Javascript
+* Websocket
+* Jquery
+* CSS (sass preprocessor)
+* HTML5
+* ChocolatechipUI
+* Handlebar
 
 ##Deployment
 *Researched various cloud platform like heroku,aws and openshift.
@@ -34,10 +34,10 @@ http://default-environment.c7kwpuxtai.us-west-2.elasticbeanstalk.com/PlayerView.
 
 #What the web app can do :
 
-CreateGame.html (support multiple game)
+* CreateGame.html (support multiple game)
 Create game,View created game,Force Start a Game
 
-PlayerView.html (support multiple player to a single game)
+* PlayerView.html (support multiple player to a single game)
 Create Player,Join Game,Start Game,Draw Card,Discard Card
 
 
@@ -53,16 +53,16 @@ Therefore, to learn from our mistake and ensure we improve ourselves consistentl
 
 ##A summary of the issues with this project:
 
-*1.Screen is not really designed to be view on mobile device , an issue with css
-*2.Websocket is not working correctly
+* Screen is not really designed to be view on mobile device , an issue with css
+* Websocket is not working correctly
 
-*3.Game logic is not implemented
+* Game logic is not implemented
 
-*4.Player name cannot be customized , to be fixed by in html by moving the text box away from the nav to section
+* Player name cannot be customized , to be fixed by in html by moving the text box away from the nav to section
 
-*5.Create game page and join game page is seperated, does not really feel like a single page application, to be combined in the future.
+* Create game page and join game page is seperated, does not really feel like a single page application, to be combined in the future.
 
-*6.Javascript is very messy
+* Javascript is very messy
 
 It was seperated in the beginning because we wanted a seperated project, one for a full jave ee server, other is a html5 application. 
 

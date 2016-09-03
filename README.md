@@ -11,7 +11,7 @@ Learn and implement subjects taught through Uno card game with JAVA EE as the ba
 There is no database, data is applicationscoped and stored in memory.
 * Jax-rs, jersey
 * Javaee Websocket
-* JavaEE
+* JavaEE on Payara server
 * Maven
 
 ##Front-end
@@ -31,12 +31,12 @@ Deployed on aws for illustration:
 * [Create Game View](http://default-environment.c7kwpuxtai.us-west-2.elasticbeanstalk.com/CreateGame.html)
 * [Join and play game View](http://default-environment.c7kwpuxtai.us-west-2.elasticbeanstalk.com/PlayerView.html)
 
-#What the web app can do :
+###What the web app can do :
 
-* CreateGame.html (support multiple game)
+* Create Game View (support multiple game)
 Create game,View created game,Force Start a Game
 
-* PlayerView.html (support multiple player to a single game)
+* Join and play game View (support multiple player to a single game)
 Create Player,Join Game,Start Game,Draw Card,Discard Card
 
 

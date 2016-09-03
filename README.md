@@ -7,14 +7,14 @@ Learn and implement subjects taught through Uno card game with JAVA EE as the ba
 
 #Summary of the the techonlogy used
 
-###Back-end
+##Back-end
 There is no database, data is applicationscoped and stored in memory.
 * Jax-rs, jersey
 * Javaee Websocket
 * JavaEE
 * Maven
 
-###Front-end
+##Front-end
 *Javascript
 *Websocket
 *Ajax getpost in json
@@ -23,7 +23,7 @@ There is no database, data is applicationscoped and stored in memory.
 *chocolatechipUI
 *handlebar
 
-###Deployment
+##Deployment
 *Researched various cloud platform like heroku,aws and openshift.
 Chosen aws because of the preconfigured docker. We would have used heroku otherwise as its free for single dynos. But we are still figuring out docker configuration for glassfish.
 
@@ -53,16 +53,16 @@ Therefore, to learn from our mistake and ensure we improve ourselves consistentl
 
 ##A summary of the issues with this project:
 
-#1.Screen is not really designed to be view on mobile device , an issue with css
-#2.Websocket is not working correctly
+*1.Screen is not really designed to be view on mobile device , an issue with css
+*2.Websocket is not working correctly
 
-#3.Game logic is not implemented
+*3.Game logic is not implemented
 
-#4.Player name cannot be customized , to be fixed by in html by moving the text box away from the nav to section
+*4.Player name cannot be customized , to be fixed by in html by moving the text box away from the nav to section
 
-#5.Create game page and join game page is seperated, does not really feel like a single page application, to be combined in the future.
+*5.Create game page and join game page is seperated, does not really feel like a single page application, to be combined in the future.
 
-#6.Javascript is very messy
+*6.Javascript is very messy
 
 It was seperated in the beginning because we wanted a seperated project, one for a full jave ee server, other is a html5 application. 
 

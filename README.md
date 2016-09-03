@@ -1,8 +1,8 @@
-# unocard game 
+# UNOcard game 
 
-###Motivation
+#Motivation
 It would be nice to actually make a fully usable product at some point, but so far the project has mostly served as our course assignment requirement. That said, any contributions that move toward the goal of making something useful are most definitely welcomed.
-###Objective 
+#Objective 
 Learn and implement subjects taught through Uno card game with JAVA EE as the backend and html5 chocolatechip ui as the client. 
 
 #Summary of the the techonlogy used
@@ -24,13 +24,12 @@ There is no database, data is applicationscoped and stored in memory.
 * Handlebar
 
 ##Deployment
-*Researched various cloud platform like heroku,aws and openshift.
+* Researched various cloud platform like heroku,aws and openshift.
 Chosen aws because of the preconfigured docker. We would have used heroku otherwise as its free for single dynos. But we are still figuring out docker configuration for glassfish.
 
-*Deployed on aws for illustration
-http://default-environment.c7kwpuxtai.us-west-2.elasticbeanstalk.com/CreateGame.html
-
-http://default-environment.c7kwpuxtai.us-west-2.elasticbeanstalk.com/PlayerView.html
+Deployed on aws for illustration:
+* [Create Game View](http://default-environment.c7kwpuxtai.us-west-2.elasticbeanstalk.com/CreateGame.html)
+* [Join and play game View](http://default-environment.c7kwpuxtai.us-west-2.elasticbeanstalk.com/PlayerView.html)
 
 #What the web app can do :
 

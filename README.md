@@ -41,5 +41,7 @@ A summary of the issues with this project:
 
 5.Create game page and join game page is seperated, does not really feel like a single page application, to be combined in the future.
 
+6.Javascript is very messy
+
 It was seperated in the beginning because we wanted a seperated project, one for a full jave ee server, other is a html5 application. 
 

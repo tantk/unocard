@@ -30,10 +30,16 @@ Even we have completed our submission for our course assignment, there are a few
 Therefore, to learn from our mistake and ensure we improve ourselves consistently,the project will be still be updated periodically.
 
 A summary of the issues with this project:
+
 1.Screen is not really designed to be view on mobile device , an issue with css
+
 2.Websocket is not working correctly
+
 3.Game logic is not implemented
+
 4.Player name cannot be customized , to be fixed by in html by moving the text box away from the nav to section
+
 5.Create game page and join game page is seperated, does not really feel like a single page application, to be combined in the future.
+
 It was seperated in the beginning because we wanted a seperated project, one for a full jave ee server, other is a html5 application. 
 

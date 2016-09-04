@@ -57,8 +57,6 @@ Therefore, to learn from our mistake and ensure we improve ourselves consistentl
 
 * Game logic is not implemented
 
-* Player name cannot be customized , to be fixed by in html by moving the text box away from the nav to section
-
 * Create game page and join game page is seperated, does not really feel like a single page application, to be combined in the future.
 
 * Javascript is very messy

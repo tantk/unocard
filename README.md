@@ -63,5 +63,5 @@ Therefore, to learn from our mistake and ensure we improve ourselves consistentl
 
 * Javascript is very messy
 
-It was seperated in the beginning because we wanted a seperated project, one for a full jave ee server, other is a html5 application. 
+* Page was seperated in the beginning because we wanted a seperated project, one for a full jave ee server, other is a html5 application. But to make things simpler, and save the trouble of adding in CORS filter, we just make everything into a single project.
 

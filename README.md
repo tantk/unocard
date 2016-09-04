@@ -28,15 +28,15 @@ Researched various cloud platform like heroku,aws and openshift.
 Chosen aws because of the preconfigured docker. We would have used heroku otherwise as its free for single dynos. But we are still figuring out docker configuration for glassfish.
 
 Deployed on aws for illustration:
-* [Create Game View](http://default-environment.c7kwpuxtai.us-west-2.elasticbeanstalk.com/CreateGame.html)
-* [Join and play game View](http://default-environment.c7kwpuxtai.us-west-2.elasticbeanstalk.com/PlayerView.html)
+* [Create Game View](http://default-environment.a2rkfrjd6t.us-west-2.elasticbeanstalk.com/CreateGame.html)
+* [Join and play game View](http://default-environment.a2rkfrjd6t.us-west-2.elasticbeanstalk.com/PlayerView.html)
 
 ###What the web app can do :
 
 * Create Game View (support multiple game)
 Create game,View created game,Force Start a Game
 
-* Join and play game View (support multiple player to a single game)
+* Join and play game View (support multiple player to a single game) [heavily depenedent on websocket]
 Create Player,Join Game,Start Game,Draw Card,Discard Card
 
 
@@ -64,4 +64,5 @@ Therefore, to learn from our mistake and ensure we improve ourselves consistentl
 * Javascript is very messy
 
 * Page was seperated in the beginning because we wanted a seperated project, one for a full jave ee server, other is a html5 application. But to make things simpler, and save the trouble of adding in CORS filter, we just make everything into a single project.
+* Websocket does not work on aws deployment 
 

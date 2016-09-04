@@ -72,12 +72,11 @@ limitations under the License.
         <script type = "text/x-handlebars" id ="playerList">
 
             {{#each player}}
-            <div>
-            <img src="image/defaultavatar.png" height="42" width="42" align="middle">
-            <a>{{this.name}}</a>
-            <a>{{this.id}}</a>
+            <div class="flex-item">
+            <img src="image/defaultavatar.png" height="42" width="42" align="middle"><br>
+            <a>Nick:{{this.name}}</a><br>
+            <a>ID:{{this.id}}</a>
             </div>
-
             {{/each}}
 
         </script>
@@ -85,15 +84,17 @@ limitations under the License.
 
     <body>
         <nav class="joinGame">
-            <h1>Name: <input type="text" id="playerName" name="playerName" value="Player 1"/>
-                <input class="button button-glow button-rounded button-caution" type = "button" id = "createPlayer" value = "Create Player" />
-                <input class="button button-glow button-rounded button-caution" type = "button" id = "loadlist" value = "Your username will displayed here once created" /></h1>
+           <h1>View Available Games</h1>
 
         </nav>
         <article id="joinGame" class="joinGame">
 
             <section>
-                <h2>List of games</h2>
+                <div class="yourdiv" >
+                <h1 style="color: white">Name: <input type="text" id="playerName" name="playerName" placeholder="Player 1" style="color: white"/>
+                <input class="button button-glow button-rounded button-caution" type = "button" id = "createPlayer" value = "Create Player" />
+                <input class="button button-glow button-rounded button-caution" type = "button" id = "loadlist" value = "Your username will displayed here once created" /></h1>
+               </div>
                 
                 <ul class="list" id ="view-games">
 
@@ -130,7 +131,7 @@ limitations under the License.
 
                     </div>
                     <br>
-                    <div >Uno with friends discard image front and back<br><span id="discardTopCard"></span></div>
+                    <div ><br><span id="discardTopCard"></span></div>
                 </div>
                 <div class='horizontal-scroll-panel'>
                     <ul id="view-cards">

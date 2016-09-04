@@ -37,8 +37,15 @@ $(function ()
             //$("#list-games").append(listGameTemplate({game: result}));
             $("#list-games2").append(listGameTemplate({game: result}));
         });
+        function getRootUri() {
+            return "ws://" + (document.location.hostname == "" ? "localhost" : document.location.hostname) + ":" +
+                    (document.location.port == "" ? "8080" : document.location.port);
+        }
 
-        connectionGlobal = new WebSocket('ws://localhost:8080/Unocard/globalRoom');
+
+
+        connectionGlobal = new WebSocket(getRootUri() + '/globalRoom');
+
 
         connectionGlobal.onerror = function (event) {
             onError(event);
@@ -46,6 +53,7 @@ $(function ()
 
         connectionGlobal.onopen = function (event) {
             onOpen(event);
+            console.log("connected global")
         };
 
         connectionGlobal.onmessage = function (event) {

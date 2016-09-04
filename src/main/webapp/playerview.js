@@ -78,13 +78,19 @@ $(function ()
 
         $(function () {
             var RoomID = gameID;
+            function getRootUri() {
+                return "ws://" + (document.location.hostname == "" ? "localhost" : document.location.hostname) 
+                    +  (document.location.port == "" ? "8080" : document.location.port); 
+
+            }
 
 
 
-            connection = new WebSocket('ws://localhost:8080/unocard/gameroom/' + RoomID);
-
+            //      connection = new WebSocket(getRootUri() + '/unocard/gameroom/' + RoomID);
+            connection = new WebSocket(getRootUri() + '/gameroom/' + RoomID);
             connection.onerror = function (event) {
                 onError(event);
+                alert("cannot connect to websocket");
             };
 
             connection.onopen = function (event) {

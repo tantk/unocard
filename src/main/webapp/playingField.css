@@ -37,14 +37,22 @@ canvas { border: 1px solid black; }
     display: flex;
     width: 200px;
     height: 70px;
-    background-color: rgba(53,53,190,0.7);
+   
 }
 
-.flex-item {
-    background-color: cornflowerblue;
+.flex-item:nth-child(odd){
+    background-color: orange;
     width: 100px;
     height: 100px;
     margin: 10px;
+    border-radius: 10px;
+}
+.flex-item:nth-child(even){
+    background-color: greenyellow;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    border-radius: 10px;
 }
 div{position: relative;
 display:block;}

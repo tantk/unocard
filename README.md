@@ -48,7 +48,7 @@ Create Player,Join Game,Start Game,Draw Card,Discard Card
 Done by SA42 Team10 : Huang He, Long Bowen , Li Rong, Tan Tian Kian
 
 Even we have completed our submission for our course assignment, there are a few issues that we failed to accomplish in this assignment.
-Therefore, to learn from our mistake and ensure we improve ourselves consistently,the project will be still be updated periodically.
+Therefore, to learn from our mistake and ensure we improve ourselves consistently,the project will be still be updated periodically, paused as of september2016 , as we are all busy with our final projects and upcoming internships.
 
 ##A summary of the issues with this project:
 

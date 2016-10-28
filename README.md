@@ -5,23 +5,26 @@ It would be nice to actually make a fully usable product at some point, but so f
 #Objective 
 Learn and implement subjects taught through Uno card game with JAVA EE as the backend and html5 chocolatechip ui as the client. 
 
-#Summary of the the techonlogy used
+#Summary of the the technology used
 
 ##Back-end
 There is no database, data is applicationscoped and stored in memory.
 * Jax-rs, jersey
-* Javaee Websocket
 * JavaEE on Payara server
-* Maven
+
 
 ##Front-end
-* Javascript
-* Websocket
-* Jquery
-* CSS (sass preprocessor)
+* spaghetti Javascript
+* endless case switch Websocket
+* spaghetti Jquery (should have used jquery ui to make cards draggable)
+* copied from codepen CSS (sass preprocessor)
 * HTML5
 * ChocolatechipUI
 * Handlebar
+
+##Other
+* Json as data transfer
+* Maven for dependency management
 
 ##Deployment
 Researched various cloud platform like heroku,aws and openshift.
@@ -45,15 +48,13 @@ Create Player,Join Game,Start Game,Draw Card,Discard Card
 
 ![alt tag](http://i.imgur.com/4BKYdiw.png?1)
 
-Done by SA42 Team10 : Huang He, Long Bowen , Li Rong, Tan Tian Kian
-
 Even we have completed our submission for our course assignment, there are a few issues that we failed to accomplish in this assignment.
-Therefore, to learn from our mistake and ensure we improve ourselves consistently,the project will be still be updated periodically, paused as of september2016 , as we are all busy with our final projects and upcoming internships.
+Therefore, to learn from our mistake and ensure we improve ourselves consistently,the project will be still be updated periodically. paused as of september2016 , as we are all busy with internships.
 
 ##A summary of the issues with this project:
 
 * Screen is not really designed to be view on mobile device , an issue with css
-* Websocket is not working correctly
+* Websocket is not working correctly(is having multiple case switch the best way to implement websocket?)
 
 * Game logic is not implemented
 

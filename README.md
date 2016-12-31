@@ -14,10 +14,10 @@ There is no database, data is applicationscoped and stored in memory.
 
 
 ##Front-end
-* spaghetti Javascript
-* endless case switch Websocket
-* spaghetti Jquery (should have used jquery ui to make cards draggable)
-* copied from codepen CSS (sass preprocessor)
+* Javascript
+* Websocket
+* Jquery
+* CSS
 * HTML5
 * ChocolatechipUI
 * Handlebar
